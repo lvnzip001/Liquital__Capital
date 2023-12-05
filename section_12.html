@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Off-taker Details - Funding Application</title>
+  <meta content="Liquital Capital provides innovative funding solutions to South African SMEs." name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Liquital Capital
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/Liquital Capital-free-multi-purpose-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+
+<body>
+  <main class="container py-4">
+    <!-- Home Button -->
+    <div class="home-button-location mb-4">
+      <a href="index.html" class="btn btn-outline-primary">
+        <i class="bi bi-house-fill"></i> Home
+      </a>
+    </div>
+  
+    <!-- Progress Bar -->
+    <div class="progress mb-4">
+      <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 11 of 12</div>
+    </div>
+  
+    <!-- Application Form -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="pt-4 pb-2">
+          <h5 class="card-title text-center pb-0 fs-4">12. Director(s) Asset & Liability Statement</h5>
+          <p class="text-center small">Please provide information about your Assets and Liability</p>
+        </div>
+  
+        <form id="directorAssetLiabilityForm" class="needs-validation" action="submit-director-asset-liability.html" method="post" novalidate>
+      
+          <!-- Assets Section -->
+          <h3>Assets</h3>
+          <table class="table" id="assetsTable">
+            <thead>
+              <tr>
+                <th>Asset Description</th>
+                <th>Amount (R)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="assetDescription[]" class="form-control" required></td>
+                <td><input type="number" name="assetAmount[]" class="form-control assetAmount" required oninput="calculateTotal('asset')"></td>
+                <td><button type="button" class="btn btn-primary addAssetRow">Add Row</button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total Assets</td>
+                <td id="totalAssets">R0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+          
+          <!-- Liabilities Section -->
+          <h3>Liabilities</h3>
+          <table class="table" id="liabilitiesTable">
+            <thead>
+              <tr>
+                <th>Liability Description</th>
+                <th>Amount (R)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="liabilityDescription[]" class="form-control" required></td>
+                <td><input type="number" name="liabilityAmount[]" class="form-control liabilityAmount" required oninput="calculateTotal('liability')"></td>
+                <td><button type="button" class="btn btn-primary addLiabilityRow">Add Row</button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total Liabilities</td>
+                <td id="totalLiabilities">R0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+    
+          <!-- Navigation Buttons -->
+          <div class="d-flex justify-content-between mt-4">
+            <a href="section_11.html" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+  <!-- End #main -->
+
+  <a
+    href="#"
+    class="back-to-top d-flex align-items-center justify-content-center"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Calculate totals for any default values on page load
+      calculateTotal('asset');
+      calculateTotal('liability');
+    });
+    
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('addAssetRow')) {
+        addRow('assetsTable', 'asset');
+      } else if (e.target.classList.contains('addLiabilityRow')) {
+        addRow('liabilitiesTable', 'liability');
+      } else if (e.target.classList.contains('removeRow')) {
+        const row = e.target.closest('tr');
+        row.remove();
+        calculateTotal('asset');
+        calculateTotal('liability');
+      }
+    });
+    
+    function addRow(tableId, type) {
+      const tableBody = document.getElementById(tableId).querySelector('tbody');
+      const newRow = tableBody.insertRow();
+      newRow.innerHTML = `
+        <td><input type="text" name="${type}Description[]" class="form-control" required></td>
+        <td><input type="number" name="${type}Amount[]" class="form-control ${type}Amount" required></td>
+        <td><button type="button" class="btn btn-danger removeRow">Remove Row</button></td>
+      `;
+      // Attach the event listener to the new amount input
+      newRow.querySelector(`.${type}Amount`).addEventListener('input', function() {
+        calculateTotal(type);
+      });
+    }
+    
+    function calculateTotal(type) {
+      let total = 0;
+      // Query only the inputs that are not in a template row
+      const amountInputs = document.querySelectorAll(`.${type}Amount:not([data-template])`);
+      amountInputs.forEach(input => {
+        const value = parseFloat(input.value) || 0;
+        total += value;
+      });
+      document.getElementById(`total${capitalizeFirstLetter(type)}s`).textContent = `R${total.toFixed(2)}`;
+    }
+    
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  </script>
+
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+ 
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

@@ -50,76 +50,49 @@
   
     <!-- Progress Bar -->
     <div class="progress mb-4">
-      <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 3 of 12</div>
+      <div class="progress-bar" role="progressbar" style="width: 66.7%;" aria-valuenow="66.7" aria-valuemin="0" aria-valuemax="100">Step 8 of 12</div>
     </div>
   
     <!-- Application Form -->
     <div class="card mb-3">
       <div class="card-body">
         <div class="pt-4 pb-2">
-          <h5 class="card-title text-center pb-0 fs-4">3. Off-taker Details</h5>
-          <p class="text-center small">Enter the details of the off-taker.</p>
+          <h5 class="card-title text-center pb-0 fs-4">8. Invoices Outstanding</h5>
+          <p class="text-center small">Provide Invoices Outstanding</p>
         </div>
   
-        <form class="row g-3 needs-validation" action="section_4.html" novalidate>
-          <div class="mb-3">
-            <label for="offTakerCompanyName" class="form-label">Company Name</label>
-            <input type="text" class="form-control" id="offTakerCompanyName" name="offTakerCompanyName" required>
-            <div class="invalid-feedback">Please enter the off-taker's company name.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerSector" class="form-label">Sector</label>
-            <input type="text" class="form-control" id="offTakerSector" name="offTakerSector" required>
-            <div class="invalid-feedback">Please enter the sector of the off-taker's company.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerContactPerson" class="form-label">Contact Person</label>
-            <input type="text" class="form-control" id="offTakerContactPerson" name="offTakerContactPerson" required>
-            <div class="invalid-feedback">Please enter the name of the contact person.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerDesignation" class="form-label">Contact Person Designation</label>
-            <input type="text" class="form-control" id="offTakerDesignation" name="offTakerDesignation" required>
-            <div class="invalid-feedback">Please enter the contact person's designation.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerEmail" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="offTakerEmail" name="offTakerEmail" required>
-            <div class="invalid-feedback">Please enter the email address.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerPhone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="offTakerPhone" name="offTakerPhone" required>
-            <div class="invalid-feedback">Please enter the phone number.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerTelephone" class="form-label">Telephone Number</label>
-            <input type="tel" class="form-control" id="offTakerTelephone" name="offTakerTelephone">
-            <div class="invalid-feedback">Please enter the telephone number.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label for="offTakerWebsite" class="form-label">Website (if available)</label>
-            <input type="url" class="form-control" id="offTakerWebsite" name="offTakerWebsite">
-            <div class="invalid-feedback">Please enter a valid URL.</div>
-          </div>
-  
-          <!-- Navigation Buttons -->
+          <form class="row g-3 needs-validation" action="section_9.html" novalidate>
+          <table class="table" id="invoicesOutstandingTable">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Amount (R)</th>
+                <th>Contact Details (+27)</th>
+                <th>Settlement Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="client[]" class="form-control" required></td>
+                <td><input type="number" name="amount[]" class="form-control" required></td>
+                <td><input type="text" name="contactDetails[]" class="form-control" required></td>
+                <td><input type="date" name="settlementDate[]" class="form-control" required></td>
+                <td><button type="button" class="btn btn-primary addRow">Add Row</button></td>
+              </tr>
+            </tbody>
+          </table>
+       
           <div class="d-flex justify-content-between mt-4">
-            <a href="section_2.html" class="btn btn-secondary">Back</a>
+            <a href="section_7.html" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Next</button>
           </div>
+
         </form>
+
       </div>
     </div>
   </main>
-
   <!-- End #main -->
 
   <a
@@ -130,6 +103,26 @@
   </a>
 
   <!-- Vendor JS Files -->
+  <script>
+  document.addEventListener('click', function (e) {
+    const tableBody = document.getElementById('invoicesOutstandingForm').querySelector('tbody');
+    if (e.target.classList.contains('addRow')) {
+      const newRow = tableBody.insertRow(-1);
+      newRow.innerHTML = `
+        <td><input type="text" name="client[]" class="form-control" required></td>
+        <td><input type="number" name="amount[]" class="form-control" required></td>
+        <td><input type="text" name="contactDetails[]" class="form-control" required></td>
+        <td><input type="date" name="settlementDate[]" class="form-control" required></td>
+        <td><button type="button" class="btn btn-danger removeRow">Remove Row</button></td>
+      `;
+    } else if (e.target.classList.contains('removeRow')) {
+      const row = e.target.closest('tr');
+      row.remove();
+    } else if (e.target.classList.contains('goBack')) {
+      // Handle the back button functionality, perhaps with window.history.back() or setting window.location.href
+    }
+  });
+</script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
