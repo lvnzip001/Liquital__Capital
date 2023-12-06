@@ -29,17 +29,31 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Liquital Capital
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/Liquital Capital-free-multi-purpose-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    .background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      filter: blur(0.5px);
+      background-position: center; 
+      z-index: -10;
+    }
+
+    /* Media query for screens with a maximum width of 800px */
+    @media (max-width: 800px) {
+      .background-container {
+        background-position: center; 
+      }
+    }
+  </style>
 </head>
 
 
-<body>
+<body style="background-color: rgb(17 27 41);">
+  <div class="background-container" style="background-image: url('assets/img/hero-bg.jpg');"></div>
   <main class="container py-4">
     <!-- Home Button -->
     <div class="home-button-location mb-4">
@@ -54,7 +68,7 @@
     </div>
   
     <!-- Application Form -->
-    <div class="card mb-3">
+    <div class="card mb-3" style="overflow-x: auto;">
       <div class="card-body">
         <div class="pt-4 pb-2">
           <h5 class="card-title text-center pb-0 fs-4">2. Managing Director Details</h5>

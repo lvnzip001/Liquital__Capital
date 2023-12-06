@@ -413,6 +413,11 @@ h6 {
   display: block;
 }
 
+.th {
+  font-size: 12px !important;
+  background-color: black !important;
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
