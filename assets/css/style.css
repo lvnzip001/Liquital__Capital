@@ -33,6 +33,27 @@ h6 {
   font-family: "Dosis", sans-serif;
 }
 
+.home_btn {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-block;
+  padding: 8px 13px 8px 13px;
+  border-radius: 7px;
+  transition: 0.5s;
+  color: #fff;
+  background: #ff4a17;
+  border: 2px solid #ff4a17;
+}
+
+.home_btn:hover {
+  border-color: #ff4a17;
+  background: rgba(255, 255, 255, 0.1);
+}
+#hero .btn-get-started:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
