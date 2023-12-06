@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Off-taker Details - Funding Application</title>
+  <meta content="Liquital Capital provides innovative funding solutions to South African SMEs." name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      filter: blur(0.5px);
+      background-position: center; 
+      z-index: -10;
+    }
+    .th {
+      font-size: 12px !important;
+      background-color: black !important;
+
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #070f1c;
+  }
+
+    /* Media query for screens with a maximum width of 800px */
+    @media (max-width: 800px) {
+      .background-container {
+        background-position: center; 
+      }
+      .sml_form {
+        width:fit-content;
+      }
+    }
+  </style>
+</head>
+
+
+<body style="background-color: rgb(3 24 35);">
+  <div class="background-container" style="background-image: url('assets/img/hero-bg.jpg');"></div>
+  <main class="container py-4">
+    <!-- Home Button -->
+    <div class="home-button-location mb-4">
+      <a href="index.html" class="home_btn">
+        <i class="bi bi-house-fill"></i> Home
+      </a>
+    </div>
+  
+    <!-- Progress Bar -->
+    <div class="progress mb-4">
+      <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 13 of 13</div>
+    </div>
+  
+    <!-- Application Form -->
+    <div class="card mb-3" style="overflow-x: auto; padding:10px; opacity: 0.85">
+     
+        <div class="pt-4 pb-2">
+          <h5 class="card-title text-center pb-0 fs-4" style="color: #070f1c;">Documents to be Provided</h5>
+          <p class="text-center small">Please ensure all the compulsory documents have been submitted</p>
+        </div>
+  
+        <form id="directorAssetLiabilityForm" class="needs-validation" action="submit-director-asset-liability.html" method="post" style="font-size: 14px;" validate>
+      
+          <!-- Assets Section -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Compulsory</th>
+                <th>Provided</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Company Profile</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_company_profile"></td>
+              </tr>
+              <tr>
+                <td>Copy of Contract or Purchase Order</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_contract_purchase_order"></td>
+              </tr>
+              <tr>
+                <td>Copy of Invoice (s)</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_copy_of_invoices"></td>
+              </tr>
+              <tr>
+                <td>Supplier Quotation (s)</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_supplier_quotations"></td>
+              </tr>
+              <tr>
+                <td>Latest six months bank statement</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_bank_statement"></td>
+              </tr>
+              <tr>
+                <td>Project schedule with timelines</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_project_schedule"></td>
+              </tr>
+              <tr>
+                <td>Copy of all outstanding invoices</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_outstanding_invoices"></td>
+              </tr>
+              <tr>
+                <td>Existing Lender(s) agreements</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_lender_agreements"></td>
+              </tr>
+              <tr>
+                <td>Latest Annual Financial Statements</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_annual_financial_statements"></td>
+              </tr>
+              <tr>
+                <td>Latest 3 Months Management Accounts</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_management_accounts"></td>
+              </tr>
+              <tr>
+                <td>Tax Clearance Certificate</td>
+                <td>Yes</td>
+                <td><input type="checkbox" name="document_tax_clearance_certificate"></td>
+              </tr>
+              <tr>
+                <td>Insurance Policies</td>
+                <td>No</td>
+                <td><input type="checkbox" name="document_insurance_policies"></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+          <!-- Liabilities Section -->
+      
+    
+          <!-- Navigation Buttons -->
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+              <label class="form-check-label" for="acceptTerms">I agree that the provided documents are accurate and correct <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#disablebackdrop">read terms and conditions</a></label>
+              <div class="invalid-feedback">You must agree before submitting.</div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Terms and Conditions</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><strong>1. Declaration of Truth and Responsibility</strong></p>
+                  <p>By accessing and using this service, you agree to the following terms and conditions:</p>
+                  <p><strong>1.1 Accuracy of Information</strong></p>
+                  <p>You acknowledge that all information provided through this service is deemed to be true, accurate, and complete as of its submission date.</p>
+                  <p><strong>1.2 Legal Consequences</strong></p>
+                  <p>You understand that providing false or misleading information may result in legal consequences and penalties.</p>
+                  <p><strong>1.3 Responsibility for Accuracy</strong></p>
+                  <p>You acknowledge the importance of the accuracy of the information provided and accept full responsibility for any discrepancies that may arise due to inaccuracies in the information.</p>
+                  <p>These terms and conditions constitute a legally binding agreement between you and [Your Company Name]. By using our services, you agree to abide by these terms and conditions. If you do not agree with any part of these terms, please refrain from using our services.</p>  
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              
+                </div>
+              </div>
+            </div>
+          </div><!-- End Disabled Backdrop Modal-->
+
+          <div class="d-flex justify-content-between mt-4">
+            <a href="section_12.html" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-outline-dark">Complete Application</button>
+          </div>
+        </form>
+
+     
+    </div>
+  </main>
+  <!-- End #main -->
+
+  <a
+    href="#"
+    class="back-to-top d-flex align-items-center justify-content-center"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Calculate totals for any default values on page load
+      calculateTotal('asset');
+      calculateTotal('liability');
+    });
+    
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('addAssetRow')) {
+        addRow('assetsTable', 'asset');
+      } else if (e.target.classList.contains('addLiabilityRow')) {
+        addRow('liabilitiesTable', 'liability');
+      } else if (e.target.classList.contains('removeRow')) {
+        const row = e.target.closest('tr');
+        row.remove();
+        calculateTotal('asset');
+        calculateTotal('liability');
+      }
+    });
+    
+    function addRow(tableId, type) {
+      const tableBody = document.getElementById(tableId).querySelector('tbody');
+      const newRow = tableBody.insertRow();
+      newRow.innerHTML = `
+        <td><input type="text" name="${type}Description[]" class="form-control" required></td>
+        <td><input type="number" name="${type}Amount[]" class="form-control ${type}Amount" required></td>
+        <td><button type="button" class="btn btn-sm btn-danger removeRow">Remove Row</button></td>
+      `;
+      // Attach the event listener to the new amount input
+      newRow.querySelector(`.${type}Amount`).addEventListener('input', function() {
+        calculateTotal(type);
+      });
+    }
+    
+    function calculateTotal(type) {
+      let total = 0;
+      // Query only the inputs that are not in a template row
+      const amountInputs = document.querySelectorAll(`.${type}Amount:not([data-template])`);
+      amountInputs.forEach(input => {
+        const value = parseFloat(input.value) || 0;
+        total += value;
+      });
+      document.getElementById(`total${capitalizeFirstLetter(type)}s`).textContent = `R${total.toFixed(2)}`;
+    }
+    
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  </script>
+
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+ 
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

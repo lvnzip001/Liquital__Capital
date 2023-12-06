@@ -72,7 +72,7 @@
   
     <!-- Progress Bar -->
     <div class="progress mb-4">
-      <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 12 of 12</div>
+      <div class="progress-bar" role="progressbar" style="width: 96%;" aria-valuenow="96" aria-valuemin="0" aria-valuemax="96">Step 12 of 13</div>
     </div>
   
     <!-- Application Form -->
@@ -83,7 +83,7 @@
           <p class="text-center small">Please provide information about your Assets and Liability</p>
         </div>
   
-        <form id="directorAssetLiabilityForm" class="needs-validation" action="submit-director-asset-liability.html" method="post" style="font-size: 14px;" novalidate>
+        <form class="g-3 needs-validation sml_form" action="section_13.html" style="width: 100%; font-size: 14px;" style="font-size: 14px;" validate>
       
           <!-- Assets Section -->
           <h5>Assets</h5>
@@ -98,7 +98,7 @@
             <tbody>
               <tr>
                 <td><input type="text" name="assetDescription[]" class="form-control" required></td>
-                <td><input type="number" name="assetAmount[]" class="form-control assetAmount" required oninput="calculateTotal('asset')"></td>
+                <td><input type="number" name="assetAmount[]" class="form-control assetAmount" required oninput="calculateAssetTotal()"></td>
                 <td><button type="button" class="btn btn-primary btn-sm addAssetRow">Add Row</button></td>
               </tr>
             </tbody>
@@ -125,7 +125,7 @@
             <tbody>
               <tr>
                 <td><input type="text" name="liabilityDescription[]" class="form-control" required></td>
-                <td><input type="number" name="liabilityAmount[]" class="form-control liabilityAmount" required oninput="calculateTotal('liability')"></td>
+                <td><input type="number" name="liabilityAmount[]" class="form-control liabilityAmount" required oninput="calculateLiabilityTotal()"></td>
                 <td><button type="button" class="btn btn-primary btn-sm addLiabilityRow">Add Row</button></td>
               </tr>
             </tbody>
@@ -141,9 +141,31 @@
           <!-- Navigation Buttons -->
           <div class="d-flex justify-content-between mt-4">
             <a href="section_11.html" class="btn btn-secondary">Back</a>
-            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop">Submit Application</button>
           </div>
-        </form>
+        
+
+        <div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Declaration of Accuracy and Responsibility</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>"I hereby declare and confirm that all the information provided in this application is true, accurate, and complete to the best of my knowledge and belief. I understand that any false, misleading, or incomplete information may have legal consequences and penalties.</p>
+
+                <p>By clicking 'Yes,' I acknowledge the importance of the accuracy of the information I have provided and take full responsibility for any discrepancies or inaccuracies that may arise due to errors in this declaration."</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Yes, I Agree</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Disabled Backdrop Modal-->
+
+      </form>
 
      
     </div>
@@ -159,10 +181,14 @@
 
   <!-- Vendor JS Files -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize total values
+    let totalAssets = 0;
+    let totalLiabilities = 0;
+    
+    document.addEventListener('DOMContentLoaded', function () {
       // Calculate totals for any default values on page load
-      calculateTotal('asset');
-      calculateTotal('liability');
+      calculateAssetTotal();
+      calculateLiabilityTotal();
     });
     
     document.addEventListener('click', function (e) {
@@ -173,8 +199,8 @@
       } else if (e.target.classList.contains('removeRow')) {
         const row = e.target.closest('tr');
         row.remove();
-        calculateTotal('asset');
-        calculateTotal('liability');
+        calculateAssetTotal();
+        calculateLiabilityTotal();
       }
     });
     
@@ -183,31 +209,37 @@
       const newRow = tableBody.insertRow();
       newRow.innerHTML = `
         <td><input type="text" name="${type}Description[]" class="form-control" required></td>
-        <td><input type="number" name="${type}Amount[]" class="form-control ${type}Amount" required></td>
-        <td><button type="button" class="btn btn-sm btn-danger removeRow">Remove Row</button></td>
+        <td><input type="number" name="${type}Amount[]" class="form-control ${type}Amount" required oninput="calculate${capitalizeFirstLetter(type)}Total()"></td>
+        <td><button type="button" class="btn btn-danger removeRow">Remove Row</button></td>
       `;
-      // Attach the event listener to the new amount input
-      newRow.querySelector(`.${type}Amount`).addEventListener('input', function() {
-        calculateTotal(type);
-      });
     }
     
-    function calculateTotal(type) {
+    function calculateAssetTotal() {
       let total = 0;
-      // Query only the inputs that are not in a template row
-      const amountInputs = document.querySelectorAll(`.${type}Amount:not([data-template])`);
+      const amountInputs = document.querySelectorAll('.assetAmount:not([data-template])');
       amountInputs.forEach(input => {
         const value = parseFloat(input.value) || 0;
         total += value;
       });
-      document.getElementById(`total${capitalizeFirstLetter(type)}s`).textContent = `R${total.toFixed(2)}`;
+      totalAssets = total;
+      document.getElementById('totalAssets').textContent = `R${total.toFixed(2)}`;
+    }
+    
+    function calculateLiabilityTotal() {
+      let total = 0;
+      const amountInputs = document.querySelectorAll('.liabilityAmount:not([data-template])');
+      amountInputs.forEach(input => {
+        const value = parseFloat(input.value) || 0;
+        total += value;
+      });
+      totalLiabilities = total;
+      document.getElementById('totalLiabilities').textContent = `R${total.toFixed(2)}`;
     }
     
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-  </script>
-
+    </script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
