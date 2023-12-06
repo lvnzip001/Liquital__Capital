@@ -129,7 +129,7 @@
   <!-- Vendor JS Files -->
   <script>
   document.addEventListener('click', function (e) {
-    const tableBody = document.getElementById('trackRecordTable').querySelector('tbody');
+    const tableBody = document.getElementById('liveContractsTable').querySelector('tbody');
     if (e.target.classList.contains('addRow')) {
       const newRow = tableBody.insertRow(-1);
       newRow.innerHTML = `
@@ -146,8 +146,7 @@
       row.remove();
     } else if (e.target.classList.contains('goBack')) {
       // Handle the back button functionality, perhaps with window.history.back() or setting window.location.href
-    }
-    e.preventDefault();
+    };
   });
 </script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

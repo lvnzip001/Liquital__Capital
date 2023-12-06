@@ -127,7 +127,7 @@
   <!-- Vendor JS Files -->
   <script>
   document.addEventListener('click', function (e) {
-    const tableBody = document.getElementById('invoicesOutstandingForm').querySelector('tbody');
+    const tableBody = document.getElementById('invoicesOutstandingTable').querySelector('tbody');
     if (e.target.classList.contains('addRow')) {
       const newRow = tableBody.insertRow(-1);
       newRow.innerHTML = `
