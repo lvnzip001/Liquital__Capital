@@ -250,11 +250,12 @@ h6 {
   border: 2px solid #fff;
 }
 
+@media (max-width: 800px) {
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
   color: #fff;
-  background: #fd3800;
-  border-color: #ff4a17;
+  background: rgb(255, 233, 233);
+}
 }
 
 .navbar>ul>li>.getstarted:before {
