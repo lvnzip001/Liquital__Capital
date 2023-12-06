@@ -29,13 +29,34 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Liquital Capital
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/Liquital Capital-free-multi-purpose-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    .background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      filter: blur(0.5px);
+      background-position: center; 
+      z-index: -10;
+    }
+    .th {
+      font-size: 12px !important;
+      background-color: black !important;
+
+    }
+
+    /* Media query for screens with a maximum width of 800px */
+    @media (max-width: 800px) {
+      .background-container {
+        background-position: center; 
+      }
+      .sml_form {
+        width:fit-content;
+      }
+    }
+  </style>
 </head>
 
 
@@ -54,14 +75,14 @@
     </div>
   
     <!-- Application Form -->
-    <div class="card mb-3" style="overflow-x: auto;">
-      <div class="card-body">
+    <div class="card mb-3" style="overflow-x: auto; padding:10px">
+     
         <div class="pt-4 pb-2">
           <h5 class="card-title text-center pb-0 fs-4">12. Director(s) Asset & Liability Statement</h5>
           <p class="text-center small">Please provide information about your Assets and Liability</p>
         </div>
   
-        <form id="directorAssetLiabilityForm" class="needs-validation" action="submit-director-asset-liability.html" method="post" novalidate>
+        <form id="directorAssetLiabilityForm" class="needs-validation" action="submit-director-asset-liability.html" method="post" style="font-size: 14px;" novalidate>
       
           <!-- Assets Section -->
           <h5>Assets</h5>
@@ -77,7 +98,7 @@
               <tr>
                 <td><input type="text" name="assetDescription[]" class="form-control" required></td>
                 <td><input type="number" name="assetAmount[]" class="form-control assetAmount" required oninput="calculateTotal('asset')"></td>
-                <td><button type="button" class="btn btn-primary addAssetRow">Add Row</button></td>
+                <td><button type="button" class="btn btn-primary btn-sm addAssetRow">Add Row</button></td>
               </tr>
             </tbody>
             <tfoot>
@@ -104,7 +125,7 @@
               <tr>
                 <td><input type="text" name="liabilityDescription[]" class="form-control" required></td>
                 <td><input type="number" name="liabilityAmount[]" class="form-control liabilityAmount" required oninput="calculateTotal('liability')"></td>
-                <td><button type="button" class="btn btn-primary addLiabilityRow">Add Row</button></td>
+                <td><button type="button" class="btn btn-primary btn-sm addLiabilityRow">Add Row</button></td>
               </tr>
             </tbody>
             <tfoot>
@@ -123,7 +144,7 @@
           </div>
         </form>
 
-      </div>
+     
     </div>
   </main>
   <!-- End #main -->
@@ -162,7 +183,7 @@
       newRow.innerHTML = `
         <td><input type="text" name="${type}Description[]" class="form-control" required></td>
         <td><input type="number" name="${type}Amount[]" class="form-control ${type}Amount" required></td>
-        <td><button type="button" class="btn btn-danger removeRow">Remove Row</button></td>
+        <td><button type="button" class="btn btn-sm btn-danger removeRow">Remove Row</button></td>
       `;
       // Attach the event listener to the new amount input
       newRow.querySelector(`.${type}Amount`).addEventListener('input', function() {

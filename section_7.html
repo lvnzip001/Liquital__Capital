@@ -54,9 +54,8 @@
       .background-container {
         background-position: center; 
       }
-      .p {
-        font-size: 12px !important;
-
+      .sml_form {
+        width:fit-content;
       }
     }
   </style>
@@ -81,15 +80,15 @@
     </div>
   
     <!-- Application Form -->
-    <div class="card mb-3" style="overflow-x: auto;">
-      <div class="card-body">
+    <div class="card mb-3" style="overflow-x: auto; padding:10px">
+      <div>
         <div class="pt-4 pb-2">
           <h5 class="card-title text-center pb-0 fs-4">7. Track Record</h5>
           <p class="text-center small">Provide Track Record Details</p>
         </div>
   
         <!-- <form id="trackRecordForm" action="section_8.html" class="needs-validation" method="post" novalidate> -->
-        <form class="row g-3 needs-validation" action="section_8.html" novalidate>
+        <form class="g-3 needs-validation sml_form" action="section_8.html" style="width: 100%; font-size: 14px" style="font-size: 14px;" novalidate>
           <table class="table" id="trackRecordTable">
             <thead>
               <tr>
@@ -107,7 +106,7 @@
                 <td><input type="number" name="amount[]" class="form-control" required></td>
                 <td><input type="text" name="contactDetails[]" class="form-control" required></td>
                 <td>
-                  <button type="button" class="btn btn-primary addRow">Add Row</button>
+                  <button type="button" class="btn btn-primary btn-sm addRow">Add Row</button>
                 </td>
               </tr>
             </tbody>
@@ -116,7 +115,7 @@
          
           <div class="d-flex justify-content-between mt-4">
             <a href="section_6.html" class="btn btn-secondary">Back</a>
-            <button type="submit" class="btn btn-primary">Next</button>
+            <button type="submit" class="btn btn-primary ">Next</button>
           </div>
         </form>
 
