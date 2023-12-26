@@ -404,7 +404,6 @@ h6 {
 .navbar-mobile .dropdown ul {
   position: static;
   display: none;
-  margin: 10px 20px;
   padding: 10px 0;
   z-index: 99;
   opacity: 1;
@@ -454,7 +453,7 @@ h6 {
 
 #hero:before {
   content: "";
-  background: rgba(13, 20, 26, 0.7);
+  background: rgba(19, 42, 59, 0.7);
   position: absolute;
   bottom: 0;
   top: 0;
