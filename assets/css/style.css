@@ -11,6 +11,9 @@
 -
 -------------------------------------------------------------*/
 
+.space-letters{
+  letter-spacing: 1.5px;
+}
 .background_matte {
   background-color: #3a7bd5; /* Base matte blue color */
   background-image: url('assets/img/feature-2.JPG'); /* Path to your texture image */

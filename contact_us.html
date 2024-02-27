@@ -42,41 +42,46 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  
+  <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-
-      <div class="col d-flex align-items-center">
-        <div>
-          <img src="assets/img/icon.png" alt="Liquital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;">
-        </div>
-      
-        <div>
-          <h1 class="logo" style="margin-bottom: 0;">
-            <a href="index.html"> LIQUITAL</a>
-          </h1>
+  
+      <!-- Logo and brand name aligned to the left -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-auto d-flex align-items-center">
+            <div>
+              <img src="assets/img/icon.png" alt="Liquital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;">
+            </div>
+            <div>
+              <h1 class="logo" style="margin-bottom: 0;">
+                <a href="index.html"> LIQUITAL</a>
+              </h1>
+            </div>
+          </div>
+          <!-- The rest of your content goes here -->
         </div>
       </div>
-      
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+  
+      <!-- Navigation aligned to the center -->
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="index.html">Business Funding</a></li>
-          <li><a class="nav-link scrollto" href="about_us.html">About</a></li>
-          <li><a class="nav-link scrollto active" href="contact_us.html">Contact</a></li>
-          <li><a class="nav-link scrollto" href="#contact">FAQ</a></li>
-          <button style="margin-left: 50px; width:120px" onclick="location.href='preapproval_application_1.html';" class="home_btn"><span>APPLY NOW</span></button>
-          <button style="margin-left: 15px; width:120px; background:#617ab3; border: 1px solid#617ab3" onclick="location.href='login.html';" class="home_btn"><span>LOGIN</span></button>
-            
-          </li>
-          
-        
+        <ul class="d-flex justify-content-center">
+          <li><a class="nav-link scrollto space-letters" href="index.html">Business Funding</a></li>
+          <li><a class="nav-link scrollto space-letters" href="about_us.html">About</a></li>
+          <li><a class="nav-link scrollto space-letters active" href="contact_us.html">Contact</a></li>
+          <li><a class="nav-link scrollto space-letters" href="#contact">FAQ</a></li>
+        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-
+  
+      <!-- Buttons aligned to the right -->
+      <div class="d-flex align-items-center">
+        <button style="margin-left: auto; width:130px" onclick="location.href='preapproval_application_1.html';" class="home_btn space-letters"><span>APPLY NOW</span></button>
+        <button style="margin-left: 15px; width:130px; background:#617ab3; border: 1px solid#617ab3" onclick="location.href='login.html';" class="home_btn space-letters"><span>LOGIN</span></button>  
+      </div>
+  
     </div>
-  </header><!-- End Header -->
+  </header>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center" style="height: 80px;">
