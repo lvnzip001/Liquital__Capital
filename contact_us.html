@@ -43,45 +43,41 @@
 
   <!-- ======= Header ======= -->
   
-  <header id="header" class="fixed-top">
+  <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
-  
-      <!-- Logo and brand name aligned to the left -->
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-auto d-flex align-items-center">
-            <div>
-              <img src="assets/img/icon.png" alt="Liquital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;">
-            </div>
-            <div>
-              <h1 class="logo" style="margin-bottom: 0;">
-                <a href="index.html"> LIQUITAL</a>
-              </h1>
-            </div>
-          </div>
-          <!-- The rest of your content goes here -->
+
+      <div class="col d-flex align-items-center">
+        <div>
+          <img src="assets/img/icon.png" alt="Liquital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;">
+        </div>
+      
+        <div>
+          <h1 class="logo" style="margin-bottom: 0;">
+            <a href="index.html"> LIQUITAL</a>
+          </h1>
         </div>
       </div>
-  
-      <!-- Navigation aligned to the center -->
+      
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
       <nav id="navbar" class="navbar">
-        <ul class="d-flex justify-content-center">
+        <ul>
           <li><a class="nav-link scrollto space-letters" href="index.html">Business Funding</a></li>
           <li><a class="nav-link scrollto space-letters" href="about_us.html">About</a></li>
           <li><a class="nav-link scrollto space-letters active" href="contact_us.html">Contact</a></li>
           <li><a class="nav-link scrollto space-letters" href="#contact">FAQ</a></li>
+          <button onclick="location.href='preapproval_application_1.html';" class="home_btn apply_btn space-letters"><span>APPLY NOW</span></button>
+          <button onclick="location.href='login.html';" class="home_btn space-letters login_btn"><span>LOGIN</span></button>
+            
+          </li>
+          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
+        
       </nav><!-- .navbar -->
-  
-      <!-- Buttons aligned to the right -->
-      <div class="d-flex align-items-center">
-        <button style="margin-left: auto; width:130px" onclick="location.href='preapproval_application_1.html';" class="home_btn space-letters"><span>APPLY NOW</span></button>
-        <button style="margin-left: 15px; width:130px; background:#617ab3; border: 1px solid#617ab3" onclick="location.href='login.html';" class="home_btn space-letters"><span>LOGIN</span></button>  
-      </div>
-  
     </div>
-  </header>
+  </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center" style="height: 80px;">
@@ -116,7 +112,7 @@
   <section>
     
     <div style="background:#aedbeb1f;">
-      <div class="row" style="padding:80px 20px 100px 20px">
+      <div class="row contact_us_row">
         <div class="col-lg-6 text-center" >
           <h2 class="how-to-title mb-4">Contact Details</h2>
           <div class="title-underline"></div> <!-- First underline -->
@@ -187,7 +183,7 @@
           </section><!-- End Contact Section -->
         </div>
 
-        <div class="col-lg-6 text-center" style="background-color: #03245206">
+        <div class="col-lg-6 text-center contact_us_box" >
           <h2 class="how-to-title mb-4">Qualifying criteria</h2>
           <div class="title-underline"></div> <!-- First underline -->
         
