@@ -42,6 +42,7 @@
 
 label {
     font-size: 12px !important;
+    letter-spacing: 0.8px; /* Adding some letter spacing for a touch of elegance */
 }
 
 .datatable-info {

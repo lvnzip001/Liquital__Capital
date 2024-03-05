@@ -78,7 +78,200 @@ h6 {
   padding: 30px  450px 10px;
   background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity by changing the last value (0.5 here) */
 }
+/*--------------------------------------------------------------
+# Header_login
+--------------------------------------------------------------*/
+#header_login {
+	transition: all 0.5s;
+	z-index: -997;
+	transition: all 0.5s;
+	top: 10px;
+  }
+  
+  #header_login .header-container {
+	background: #fff;
+	border-radius: 30px;
+	font-size: 26px;
+	padding: 25px 20px 25px 20px;
+	line-height: 0.5;
+	font-weight: 500;
+	font-family: "Nunito", sans-serif;
+  }
+  
+  #header_login.header-scrolled {
+	background: #fff;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+	top: 0;
+  }
+  
+  
+  
+  
+  @media (max-width: 992px) {
+	#header {
+	  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+	  top: 0;
+	  background: #012970;
+	  .no-mobile {
+		display: none;
+	  }
+	}
+  
+   .top-layer{
+		z-index: 1000;
+	  }
+   }
+  
+	#header_login .logo {
+	  padding-left: 0;
+	}
+  
+	#header_login .logo h1 {
+	  font-size: 24px;
+	}
+  
+  
+  .no-scroll {
+	overflow: hidden !important;
+  }
+  .back-layer{
+	z-index: 1;
+  }
+  .background-container {
+	position: relative;
+	background-size: cover; /* or use 'cover' depending on the desired effect */
+ 	background-repeat: no-repeat;
+  	background-position: center;
+  }
+  
+  .background-container::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	z-index: 1;
 
+
+  }/*--------------------------------------------------------------
+# Header_login
+--------------------------------------------------------------*/
+
+.register-button-location {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  z-index: 1;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 6px 18px;
+}
+
+.home-button-location {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 1;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 6px 18px;
+}
+
+#header_login {
+	transition: all 0.5s;
+	z-index: -997;
+	transition: all 0.5s;
+	top: 10px;
+  }
+  
+  #header_login .header-container {
+	background: #fff;
+	border-radius: 30px;
+	font-size: 26px;
+	padding: 25px 20px 25px 20px;
+	line-height: 0.5;
+	font-weight: 500;
+	font-family: "Nunito", sans-serif;
+  }
+  
+  #header_login.header-scrolled {
+	background: #fff;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+	top: 0;
+  }
+  
+  
+  
+  
+  @media (max-width: 992px) {
+	#header {
+	  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+	  top: 0;
+	  background: #012970;
+	  .no-mobile {
+		display: none;
+	  }
+	}
+  
+   .top-layer{
+		z-index: 1000;
+	  }
+   }
+  
+	#header_login .logo {
+	  padding-left: 0;
+	}
+  
+	#header_login .logo h1 {
+	  font-size: 24px;
+	}
+  
+  
+  .no-scroll {
+	overflow: hidden !important;
+  }
+  .back-layer{
+	z-index: 1;
+  padding: 40px 0px 0px 0px !important;
+  }
+  .background-container {
+	position: relative;
+	background-size: cover; /* or use 'cover' depending on the desired effect */
+ 	background-repeat: no-repeat;
+  	background-position: center;
+  }
+  
+  .background-container::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	z-index: 1;
+  }
+
+  .login-title {
+    font-size: 28px; /* Slightly larger to command attention */
+    font-weight: 700; /* Bold for prominence */
+    color: #000721; /* A deep blue color, solid rather than semi-transparent */
+    margin: 30px 0px 40px 0px; /* Consistent vertical spacing */
+    text-shadow: 1px 1px 2px #0005; /* Subtle text shadow for depth, with reduced opacity for sophistication */
+    letter-spacing: 0.5px; /* Adding some letter spacing for a touch of elegance */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* A clean, professional font-stack */
+  }
+  
 /*--------------------------------------------------------------
 # Cellphone stuff 
 --------------------------------------------------------------*/
@@ -423,7 +616,7 @@ h6 {
 
 .card-title {
   padding: 20px 0 15px 0;
-  font-size: 18px;
+  
   font-weight: 500;
   color: #012970;
   font-family: "Poppins", sans-serif;
