@@ -210,9 +210,24 @@ h6 {
 	top: 0;
   }
   
+  .login-title {
+    font-size: 28px; /* Slightly larger to command attention */
+    font-weight: 700; /* Bold for prominence */
+    color: #000721; /* A deep blue color, solid rather than semi-transparent */
+    margin: 30px 0px 40px 0px; /* Consistent vertical spacing */
+    text-shadow: 1px 1px 2px #0005; /* Subtle text shadow for depth, with reduced opacity for sophistication */
+    letter-spacing: 0.5px; /* Adding some letter spacing for a touch of elegance */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* A clean, professional font-stack */
+  }
   
-  
-  
+  .login_pos{
+    min-height: 100vh !important;
+  }
+  @media (max-width: 992px) {
+    .login_pos{
+      min-height: 80vh !important;
+      padding: 0px 10px 0px 10px;
+    }
   @media (max-width: 992px) {
 	#header {
 	  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
@@ -222,6 +237,16 @@ h6 {
 		display: none;
 	  }
 	}
+
+  .login-title {
+    font-size: 28px; /* Slightly larger to command attention */
+    font-weight: 700; /* Bold for prominence */
+    color: #000721; /* A deep blue color, solid rather than semi-transparent */
+    margin: 30px 0px 40px 0px; /* Consistent vertical spacing */
+    text-shadow: 1px 1px 2px #0005; /* Subtle text shadow for depth, with reduced opacity for sophistication */
+    letter-spacing: 0.5px; /* Adding some letter spacing for a touch of elegance */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* A clean, professional font-stack */
+  }
   
    .top-layer{
 		z-index: 1000;
@@ -262,15 +287,7 @@ h6 {
 	z-index: 1;
   }
 
-  .login-title {
-    font-size: 28px; /* Slightly larger to command attention */
-    font-weight: 700; /* Bold for prominence */
-    color: #000721; /* A deep blue color, solid rather than semi-transparent */
-    margin: 30px 0px 40px 0px; /* Consistent vertical spacing */
-    text-shadow: 1px 1px 2px #0005; /* Subtle text shadow for depth, with reduced opacity for sophistication */
-    letter-spacing: 0.5px; /* Adding some letter spacing for a touch of elegance */
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* A clean, professional font-stack */
-  }
+ 
   
 /*--------------------------------------------------------------
 # Cellphone stuff 
