@@ -260,9 +260,6 @@ h6 {
 	}
   
   
-  .no-scroll {
-	overflow: hidden !important;
-  }
   .back-layer{
 	z-index: 1;
   padding: 40px 0px 0px 0px !important;
