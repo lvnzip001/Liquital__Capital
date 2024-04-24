@@ -42,6 +42,7 @@
 <body>
 
   <!-- ======= Header ======= -->
+  
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -65,7 +66,7 @@
           <li><a class="nav-link scrollto space-letters" href="index.html">Business Funding</a></li>
           <li><a class="nav-link scrollto space-letters" href="about_us.html">About</a></li>
           <li><a class="nav-link scrollto space-letters" href="contact_us.html">Contact</a></li>
-          <li><a class="nav-link scrollto space-letters" href="#contact">FAQ</a></li>
+          <li><a class="nav-link scrollto space-letters  active" href="faq.html">FAQ</a></li>
           <button onclick="location.href='preapproval_application_1.html';" class="home_btn apply_btn space-letters"><span>APPLY NOW</span></button>
           <button onclick="location.href='login.html';" class="home_btn space-letters login_btn"><span>LOGIN</span></button>
             
@@ -78,6 +79,9 @@
     </div>
   </header><!-- End Header -->
 
+  <!-- ======= Hero Section ======= -->
+  
+  
 
   <main id="main">
 
@@ -87,124 +91,82 @@
    <section class="home">
     <div class="col-12 no-padding background_matte" style="background-color: #3a7bd5; background-image: url('assets/img/application-bg.jpg'); background-repeat: no-repeat; background-size: cover; max-height: 280px; display: flex; align-items: center; justify-content: center; text-align: center; color: #ffffff; position: relative;">
       
-      <div style="position: relative; z-index: 1;   text-align: center;height:100%; width:100%">
+      <div style="position: relative; z-index: 1;  text-align: center;height:100%; width:100%">
         <div class="section-title">
           <div class="content" style="text-align: center;">
-            <h3 style="font-size: 35px; margin: 150px 0px; color: #f0efef;  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);"><span style=" border-bottom: 3px solid #3bbcb1;padding: 20px;">Loan <strong>Application</strong></span></h3>
+            <h3 style="font-size: 44px; margin: 150px 0px; color: #f0efef;  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);"><span style=" border-bottom: 2px solid #3bbcb1;padding: 20px;"><strong>FAQ</strong></span></h3>
+            
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
+        <!-- ======= Frequently Asked Questions Section ======= -->
+        <section id="faq" class="faq bg-light">
+          <!-- <div class="container">
+            <div class="section-title">
     
-    <div style="background:#aedbeb1f;">
-      <div class="row section-padding ">
-        <div class="col-lg-6 text-center">
-          <h2 class="how-to-title mb-4">Business Loan Application</h2>
-          <div class="title-underline"></div> <!-- First underline -->
-
-          <img src="assets/img/froms1.png" style="height: 80px; margin:40px 0px 40px 0px" >
-        </div>
-
-        <div class="col-lg-6">
-          <div class="row application_mobile">
-            <div class="col-lg-3 col-md-4 col-4">
-              <h3 class="application-title">STEP <span class="application-number application-step-complete" style="margin-right: 25px;"><i class="bi bi-check"></i></span> </h3>
+              <div class="content" style="text-align: center;">
+                <h3 class="header_intro">Frequently Asked <strong>Questions</strong></h3>
+              </div>
+            </div> -->
+    
+            <div class="row">
+             
+    
+    
+              <div class="col-lg-12">
+    
+                <div class="container my-5">
+                  <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+                  <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          What are the eligibility requirements for applying?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                          To be eligible to apply, your business must be registered, have been operational for at least 12 months, and have an annual turnover of over R1,000,000.
+                        </div>
+                      </div>
+                    </div>
+                
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          How long does it take to receive funding after applying?
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                          Funding decisions are typically made within 24 to 48 hours after all necessary documents are submitted.
+                        </div>
+                      </div>
+                    </div>
+                
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Are there any fees involved in applying for funding?
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                          There are no application fees; however, once approved, you will be informed about the interest rates and any associated service fees.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-4">
-              <h3 class="application-title">STEP <span class="application-number application-step-complete" style="margin-right: 25px;"><i class="bi bi-check"></i></span> </h3>
-            </div >
-            <div class="col-lg-3 col-md-4 col-4">
-              <h3 class="application-title">STEP <span class="application-number application-step-active" style="margin-right: 25px;">3</span> </h3>
-            </div>
-            <hr>
+    
           </div>
-          <form class="my-4" action="complete_application.html">
-            <h3 class="mb-4" style="color: #263D4D; font-size:18px">Final Step. Almost done...</h3>
-          
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName" class="form-label application_questions">First Name*</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" maxlength="150">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName" class="form-label application_questions">Last Name*</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" maxlength="150">
-              </div>
-            </div>
-          
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="emailAddress" class="form-label application_questions">Email Address*</label>
-                <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="contactNumber" class="form-label application_questions">Contact Number*</label>
-                <input type="tel" class="form-control" id="contactNumber" placeholder="Enter Contact Number">
-              </div>
-            </div>
-          
-            <div class="mb-3">
-              <label for="alternativeNumber" class="form-label application_questions">Alternative Number</label>
-              <input type="tel" class="form-control" id="alternativeNumber" placeholder="Enter Alternative Number">
-            </div>
-          
-            <div class="mb-3">
-              <label for="referralSource" class="form-label application_questions">How did you hear about us?*</label>
-              <select class="form-select" id="referralSource">
-                <option selected>Select One</option>
-                <!-- Add more referral sources as options -->
-              </select>
-            </div>
-          
-            <div class="mb-3">
-              <label class="form-label application_questions">Would you like to fast-track your application?*</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="fastTrackApplication" id="fastTrackYes" value="yes">
-                <label class="form-check-label" for="fastTrackYes">Yes</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="fastTrackApplication" id="fastTrackNo" value="no">
-                <label class="form-check-label" for="fastTrackNo">No</label>
-              </div>
-              <small class="form-text text-muted">
-                <i>
-                  Fast-track your application by providing us with upfront consent to run a bureau credit check on your business.
-                </i>
-               
-              </small>
-            </div>
-          
-            <div class="mb-4">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="termsAndConditions" required>
-                <label class="form-check-label application_questions" for="termsAndConditions">
-                  By submitting your application you agree to our <a href="url-to-tc">T&C's</a> and <a href="url-to-privacy-policy">Privacy Policy</a>.
-                </label>
-              </div>
-            </div>
-          
-            <div class="row">
-              <div class="col-6">
-                <a type="button" class="btn btn-secondary" href="preapproval_application_2.html">Previous</a>
-              </div>
-              <div class="col-6 text-end">
-                <button type="submit" class="home_btn">Submit</button>
-              </div>
-            </div>
-          </form>
-          
-
-         
-        </div>
-
-      </div>
-      
-    </div>
-    
-  </section><!-- End Pricing Section -->
+        </section><!-- End Frequently Asked Questions Section -->
 
 
   <section class="dashed-hr">
