@@ -554,9 +554,9 @@ h6 {
   display: inline-block; /* This makes the underlines match the title width */
   color: #26377A;
   font-family: 'Helvetica';
-  font-size: 44px;
+  font-size: 40px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  padding: 0px 80px 10px 80px;
+  padding: 0px 60px 10px 60px;
 }
 
 .title-contact {
@@ -566,7 +566,7 @@ h6 {
   font-family: 'Helvetica';
   font-size: 44px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  padding: 30px 80px 10px 80px;
+  padding: 30px 40px 10px 40px;
 }
 
 .title-underline {
