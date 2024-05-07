@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Off-taker Details - Funding Application</title>
+    <meta content="Liquital Capital provides innovative funding solutions to South African SMEs." name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons' %}.css" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <style>
+      .background-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        filter: blur(0.5px);
+        background-position: center;
+        z-index: -10;
+      }
+      .th {
+        font-size: 12px !important;
+        background-color: black !important;
+      }
+      
+      /* Media query for screens with a maximum width of 800px */
+      @media (max-width: 800px) {
+        .background-container {
+          background-position: center;
+        }
+        .sml_form {
+          width: fit-content;
+        }
+      }
+    </style>
+  </head>
+
+  <body style="background-color: rgb(3 24 35);">
+    <div class="background-container" style="background-image: url('{% static 'assets/img/hero-bg.jpg' %}');"></div>
+    <main class="container py-4">
+      <!-- Home Button -->
+      <div class="home-button-location mb-4">
+        <a href="{% url 'index' %}" class="home_btn"><i class="bi bi-house-fill"></i> Home</a>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 91.7%;" aria-valuenow="91.7" aria-valuemin="0" aria-valuemax="100">Step 11 of 13</div>
+      </div>
+
+      <!-- Application Form -->
+      <div class="card mb-3" style="overflow-x: auto; padding:10px; opacity: 0.85">
+        <div class="pt-4 pb-2">
+          <h5 class="card-title text-center pb-0 fs-4" style="color: #070f1c;">11. Company Liability Register</h5>
+          <p class="text-center small">Please provide information about your Live Contracts</p>
+        </div>
+
+        <form id="companyLiabilityRegisterForm" action="{% url 'asset_liability_view' %}" class="needs-validation" style="font-size: 14px;" novalidate>
+          <table class="table" id="companyLiabilityRegisterTable">
+            <thead>
+              <tr>
+                <th>Lender Name</th>
+                <th>Amount Financed (R)</th>
+                <th>Outstanding Amount (R)</th>
+                <th>Settlement Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" name="lenderName[]" class="form-control" required />
+                </td>
+                <td>
+                  <input type="number" name="amountFinanced[]" class="form-control" required />
+                </td>
+                <td>
+                  <input type="number" name="outstandingAmount[]" class="form-control" required />
+                </td>
+                <td>
+                  <input type="date" name="settlementDate[]" class="form-control" required />
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm addRow">Add Row</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'section_10' %}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-primary">Next</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script>
+      document.addEventListener('click', function (e) {
+        const tableBody = document.getElementById('companyLiabilityRegisterForm').querySelector('tbody')
+        if (e.target.classList.contains('addRow')) {
+          const newRow = tableBody.insertRow(-1)
+          newRow.innerHTML = `
+                                <td><input type="text" name="lenderName[]" class="form-control" required></td>
+                                <td><input type="number" name="amountFinanced[]" class="form-control" required></td>
+                                <td><input type="number" name="outstandingAmount[]" class="form-control" required></td>
+                                <td><input type="date" name="settlementDate[]" class="form-control" required></td>
+                                <td>
+                                  <button type="button" class="btn btn-sm btn-danger removeRow">Remove Row</button>
+                                </td>
+                              `
+        } else if (e.target.classList.contains('removeRow')) {
+          const row = e.target.closest('tr')
+          row.remove()
+        }
+      })
+    </script>
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+   
+  </body>
+</html>

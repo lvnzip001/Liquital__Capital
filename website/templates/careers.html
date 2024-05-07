@@ -1,0 +1,396 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Liquital Capital - Empowering SME <span>s</span></title>
+    <meta content="Liquital Capital provides innovative funding solutions to South African SMEs." name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons' %}.css" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!--  =======================================================
+  * Template Name: Liquital Capital
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/Liquital Capital-free-multi-purpose-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ========================================================  -->
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center justify-content-between">
+        <div class="col d-flex align-items-center">
+          <div>
+            <img src="assets/img/icon.png" alt="Liquital Capital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;" />
+          </div>
+
+          <div>
+            <h1 class="logo" style="margin-bottom: 0;"><a href="{% url 'index' %}">LIQUITAL</a></h1>
+          </div>
+        </div>
+
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="{% url 'index' %}" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li>
+              <a class="nav-link scrollto" href="#portfolio">Home</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#about">About</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#services">Services</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#portfolio">Milestones</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto active" href="#team">Careers</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="#contact">Contact</a>
+            </li>
+            <li class="dropdown getstarted scrollto">
+              <a href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li>
+                  <a href="section_0.html">Purchase Order Financing Application</a>
+                </li>
+                <li>
+                  <a href="section_0.html">Invoice Discounting Application</a>
+                </li>
+                <li>
+                  <a href="section_0.html">Contract Financing Application</a>
+                </li>
+                <!--  <li><a href="#">Asset Acquisition Financing Application</a></li>              
+              <li><a href="#">Working Capital Loan Application</a></li>
+              <li><a href="#">Business Growth Advisory Service Application</a></li>  -->
+              </ul>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+      <div class="hero-container">
+        <h1>Empowering SMEs with Innovative Funding</h1>
+        <h2>Liquital Capital - Your Partner in Business Growth and Success</h2>
+        <div class="d-flex">
+          <a href="#about" class="btn-get-started scrollto">Learn More</a>
+          <a href="https://www.youtube.com/watch?v=RpvAmG1NNN0" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Our Approach</span></a>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <div class="row justify-content-end">
+        <div class="col-lg-11">
+          <div class="row justify-content-end">
+            <!-- Happy Clients -->
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-emoji-smile"></i>
+                <span data-purecounter-start="0" data-purecounter-end="300" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Happy Clients</p>
+              </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-journal-richtext"></i>
+                <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Successful Projects</p>
+              </div>
+            </div>
+
+            <!-- Years of Experience -->
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-clock"></i>
+                <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Years of Experience</p>
+              </div>
+            </div>
+
+            <!-- Awards -->
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box">
+                <i class="bi bi-award"></i>
+                <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Industry Awards</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services section-bg">
+        <div class="container">
+          <div class="section-title">
+            <h2>Milestones</h2>
+            <p>Explore Our Financial Solutions</p>
+          </div>
+
+          <div class="row">
+            <!-- Purchase Order Financing -->
+            <div class="col-md-6">
+              <div class="icon-box">
+                <i class="bi bi-cart4"></i>
+                <h4><a href="#">Purchase Order Financing</a></h4>
+                <p>Providing short-term finance for SMEs to pay suppliers upfront for verified purchase orders, enhancing their ability to take on larger orders and grow.</p>
+              </div>
+            </div>
+            <!-- Invoice Discounting -->
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="icon-box">
+                <i class="bi bi-receipt"></i>
+                <h4><a href="#">Invoice Discounting</a></h4>
+                <p>Offering immediate cash flow solutions by advancing funds against unpaid invoices, empowering businesses to manage their working capital more effectively.</p>
+              </div>
+            </div>
+            <!-- Contract Financing -->
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="icon-box">
+                <i class="bi bi-file-earmark-text"></i>
+                <h4><a href="#">Contract Financing</a></h4>
+                <p>Specialized financial arrangement to support SMEs in fulfilling large contracts, especially useful in industries like construction, manufacturing, and government contracting.</p>
+              </div>
+            </div>
+            <!-- Asset Acquisition Financing -->
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="icon-box">
+                <i class="bi bi-truck"></i>
+                <h4><a href="#">Asset Acquisition Financing</a></h4>
+                <p>Enabling small businesses to acquire essential assets like machinery, vehicles, or real estate, to support their operations and expansion plans.</p>
+              </div>
+            </div>
+            <!-- Working Capital Loans -->
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="icon-box">
+                <i class="bi bi-cash-stack"></i>
+                <h4><a href="#">Working Capital Loans</a></h4>
+                <p>Providing flexible loans to cover everyday operational costs, ensuring businesses can continue smooth operations without financial interruptions.</p>
+              </div>
+            </div>
+            <!-- Business Growth Advisory -->
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="icon-box">
+                <i class="bi bi-graph-up"></i>
+                <h4><a href="#">Business Growth Advisory</a></h4>
+                <p>Offering expert advice and strategic planning services to assist SMEs in scaling their operations, entering new markets, and achieving sustainable growth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+      <!-- ======= Team Section ======= -->
+      <!--  <section id="team" class="team section-bg">
+      <div class="container" >
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Check our Team</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="member">
+              <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>End Team Section  -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-info">
+                <h3>Liquital Capital</h3>
+                <p>
+                  90 Rivonia Rd <br />
+                  Sandton, Johannesburg<br /><br />
+                  <strong>Phone:</strong> +27 11 243 5454<br />
+                  <strong>Email:</strong> info@example.com<br />
+                </p>
+                <div class="social-links mt-3">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                  <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                  <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                  <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Purchase Order Financing</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Invoice Discounting</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Contract Financing</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Asset Acquisition Financing</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Working Capital Loans</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Business Growth Advisory</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-6 footer-newsletter">
+              <h4>Our Newsletter</h4>
+              <p>Get weekly financial updates</p>
+              <form action="" method="post">
+                <input type="email" name="email" />
+                <input type="submit" value="Subscribe" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Liquital Capital</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/Liquital Capital-free-multi-purpose-html-template/ -->
+          Enterprise Number: <a href="#">2023/120348/12</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>

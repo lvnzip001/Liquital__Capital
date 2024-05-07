@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Liquital - Empowering SMEs</title>
+  <meta content="Liquital provides innovative funding solutions to South African SMEs." name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons' %}.css" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+  <!-- =======================================================
+  * Template Name: Liquital
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/Liquital-free-multi-purpose-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+
+  <!-- ======= Header ======= -->
+  
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="col d-flex align-items-center">
+        <div>
+          <img src="assets/img/icon.png" alt="Liquital Logo" class="img-fluid" style="width: 35px; margin-right: 10px;">
+        </div>
+      
+        <div>
+          <h1 class="logo" style="margin-bottom: 0;">
+            <a href="index.html"> LIQUITAL</a>
+          </h1>
+        </div>
+      </div>
+      
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto space-letters" href="{% url 'business_funding' %}">Business Funding</a></li>
+          <li><a class="nav-link scrollto space-letters" href="{% url 'about_us' %}">About</a></li>
+          <li><a class="nav-link scrollto space-letters active" href="{% url 'contact_us' %}">Contact</a></li>
+          <li><a class="nav-link scrollto space-letters" href="{% url 'faq' %}">FAQ</a></li>
+          <button onclick="location.href='{% url 'preapproval_application_1' %};"
+            class="home_btn apply_btn space-letters"><span>APPLY NOW</span></button>
+          <button onclick="location.href='{% url 'client_login' %};"
+            class="home_btn space-letters login_btn"><span>LOGIN</span></button>
+
+          </li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+        
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  
+  
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+   <!-- ======= About Boxes Section ======= -->
+   
+   <section class="home">
+    <div class="col-12 no-padding background_matte" style="background-color: #3a7bd5; background-image: url('{% static 'assets/img/application-bg.jpg' %} '); background-repeat: no-repeat; background-size: cover; max-height: 280px; display: flex; align-items: center; justify-content: center; text-align: center; color: #ffffff; position: relative;">
+      
+      <div style="position: relative; z-index: 1;  text-align: center;height:100%; width:100%">
+        <div class="section-title">
+          <div class="content" style="text-align: center;">
+            <h3 style="font-size: 44px; margin: 150px 0px; color: #f0efef;  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);"><span style=" border-bottom: 2px solid #3bbcb1;padding: 20px;"><strong>Contact</strong> Us</span></h3>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  
+  <section>
+    
+    <div style="background:#aedbeb1f;">
+      <div class="row contact_us_row" style="padding-bottom: 0px;">
+
+        <div class="col-lg-6 text-center contact_us_box" >
+          <h2 class="title-contact mb-4">Qualifying criteria</h2>
+          <div class="title-underline"></div> <!-- First underline -->
+        
+        
+       
+            <div class="mb-3">
+              <label for="loanAmount" class="form-label application_questions"><strong>Please note that in order to apply for business funding: </strong></label>
+            
+              <br>
+              <p style="padding: 10px 50px ;"> Your business needs to have a <span style="color: #26377A">turnover greater than R1 million (R100 000 per month) over the past 12 months.</span>
+                You must be a registered entity and have been fully operational for at least 12 months ( We currently do not fund sole proprietaries, trusts, or partnerships ).</p>
+            
+              <hr>
+              <br>
+              <p class="application_questions"></p><strong>If you can answer “YES” to all of the above criteria please go ahead and apply.</strong></p>
+            </div>
+            
+            
+              
+          
+            <a type="submit" href="preapproval_application_1.html" class="home_btn">APPLY NOW </a>
+          
+        </div>
+
+        <div class="col-lg-6 text-center contact_us_box_2" >
+          <h2 class="title-contact mb-4">Contact Details</h2>
+          <div class="title-underline"></div> <!-- First underline -->
+
+          <section id="contact" class="contact">
+            <br>
+            <div class="container" data-aos="fade-up">
+      
+          
+      
+            <div class="col">
+      
+              <div class="col-lg-13">
+      
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="info-box">
+                      <i class="bx bx-map"></i>
+                      <h3>Our Address</h3>
+                      <p>90 Rivonia Rd, Sandton, Johannesburg 2109</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="info-box">
+                      <i class="bx bx-envelope"></i>
+                      <h3>Email Us</h3>
+                      <p>info@liquitalcapital.com</p>
+                    </div>
+                  </div>
+                 
+                </div>
+      
+              </div>
+              <br>
+             
+      
+              <div class="col-lg-13 mt-4 mt-lg-0">
+                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                      <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                    </div>
+                  </div>
+                  <div class="form-group mt-3">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  </div>
+                  <div class="form-group mt-3">
+                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                  </div>
+                  <div class="my-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                  </div>
+                  <div class="text-center"><button class="home_btn" type="submit" >Send Message</button></div>
+                </form>
+              </div>
+      
+            </div>
+            <br>
+            <br>
+      
+            </div>
+          </section><!-- End Contact Section -->
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+    
+  </section><!-- End Pricing Section -->
+
+
+  <section class="dashed-hr">
+    <br>
+    <hr class="dashed-hr">
+  </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Liquital</h3>
+              <p>
+                90 Rivonia Rd <br>
+                Sandton, Johannesburg<br><br>
+                <strong>Phone:</strong> +27 11 243 5454<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Purchase Order Financing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Invoice Discounting</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Contract Financing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Asset Acquisition Financing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Working Capital Loans</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Business Growth Advisory</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Get weekly financial updates</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Liquital</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/Liquital-free-multi-purpose-html-template/ -->
+        Enterprise Number: <a href="#">2023/120348/12</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

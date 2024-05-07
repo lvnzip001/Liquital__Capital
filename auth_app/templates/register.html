@@ -1,0 +1,446 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    content="width=device-width, initial-scale=1.0"
+    name="viewport"
+  >
+
+  <title>
+    Staff Registration
+  </title>
+
+  <meta
+    content=""
+    name="description"
+  >
+
+  <meta
+    content=""
+    name="keywords"
+  >
+
+    <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon" >
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" >
+
+  <link
+    href="{% static 'assets/img/favicon.png' %}"
+    rel="icon"
+  >
+
+  <link
+    href="{% static 'assets/img/apple-touch-icon.png' %}"
+    rel="apple-touch-icon"
+  >
+
+  <!-- Google Fonts -->
+
+  <link
+    href="https://fonts.gstatic.com"
+    rel="preconnect"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet"
+  >
+
+  <!-- Vendor CSS Files -->
+
+  <link
+    href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+    rel="stylesheet"
+  >
+
+  <link
+    href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+    rel="stylesheet"
+  >
+
+
+
+ 
+
+  <!-- Template Main CSS File -->
+
+  <link
+    href="{% static 'assets_com/css/style.css' %}"
+    rel="stylesheet"
+  >
+
+  <style>
+    .background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      filter: blur(0.5px);
+      background-position: center;
+      z-index: -10;
+    }
+    
+    /* Media query for screens with a maximum width of 800px */
+    @media (max-width: 800px) {
+      .background-container {
+        background-position: center;
+      }
+    }
+  </style>
+
+</head>
+
+<body style="background-color: rgb(3 24 35);">
+    <div class="background-container" style="background-image: url('{% static 'assets/img/hero-bg.jpg' %}');"></div>
+      
+  <a class="container home-button-location"
+      href="{% url 'index' %}">
+      <i class="bi bi-house-fill"></i>
+    </a>
+  
+    <div class="contain er">
+    <div class="container">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
+              <div class="d-flex justify-content-center py-4">
+                <a
+                  href="{% static '' %}"
+                  class="logo d-flex align-items-center w-auto"
+                >
+                  <img
+                    src="{% static 'assets/img/icon.png'  %}"
+                    alt=""
+                  >
+
+                  <span class="d-none d-lg-block" style="color: white;">Liquital</span>
+                </a>
+              </div>
+
+               <!-- Default Card -->
+          {% if form.errors %}
+          <div class="card d-flex justify-content-center py-2" style="background-color: #e7938794;">
+            <div class="card-body">
+              <center><h5 class="card-title">Form Input Error 
+              </h5></center>
+              {{form.errors}}
+            </div>
+          </div><!-- End Default Card -->
+          {% endif %}
+
+  
+
+
+              <!-- End Logo -->
+
+              <div class="card mb-3" style="background-color: whitesmoke; opacity: 0.95;">
+                <div class="card-body">
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+
+                    <p class="text-center small">
+                      Enter your personal details to create account
+                    </p>
+                  </div>
+
+                  <form
+                    method="POST"
+                    action=""
+                    class="row g-3 needs-validation"
+                    novalidate="novalidate"
+                  >
+                    {% csrf_token %}
+
+                    <div class="col-12">
+                      <label
+                        for="yourUsername"
+                        class="form-label"
+                      >Username</label>
+
+                      {{ form.username }}
+
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourEmail"
+                        class="form-label"
+                      >Your Email</label>
+
+                      <div class="input-group has-validation">
+                        <span
+                          class="input-group-text"
+                          id="inputGroupPrepend"
+                        >@</span>
+
+                        {{ form.email }}
+
+                        <div class="invalid-feedback">Please enter a valid Email address!</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourfirst_name"
+                        class="form-label"
+                      >First Name</label>
+
+                      {{ form.first_name }}
+
+                      <div class="invalid-feedback">
+                        Please enter your First Name.
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourlast_name"
+                        class="form-label"
+                      >Last Name</label>
+
+                      {{ form.last_name }}
+
+                      <div class="invalid-feedback">
+                        Please enter your Last Name.
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourPassword"
+                        class="form-label"
+                      >Password</label>
+
+                      {{ form.password1 }}
+
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourPassword"
+                        class="form-label"
+                      >Confirm Password</label>
+
+                      {{ form.password2 }}
+
+                      <div class="invalid-feedback">Please confirm your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="acceptTerms"
+                          value="true"
+                          required="true"
+                          id="acceptTerms"
+                        ></input>
+
+                        <label
+                          class="form-check-label"
+                          for="acceptTerms"
+                        >
+                          &nbsp; I agree and accept the
+                        </label>
+                          <a
+                            href="terms_of_use"
+                            data-bs-toggle="modal"
+                            data-bs-target="#ExtralargeModal"
+                          >terms and conditions</a>
+                        
+
+                        
+
+                        <!-- End Basic Modal -->
+
+                        <div class="invalid-feedback">
+                          You must agree before submitting.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <button
+                        class="btn btn-primary w-100"
+                        data-bs-toggle="modal"
+                        data-bs-target="#disablebackdrop"
+                        type="submit"
+                      >Create Account</button>
+                    </div>
+
+                    <div class="col-12">
+                      <p class="small mb-0">
+                        Already have an account?
+
+                        <a href="{% url 'login' %}">Log in</a>
+                      </p>
+                    </div>
+                  </form>
+
+                  
+                </div>
+              </div>
+
+        
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <div
+                          class="modal fade"
+                          id="ExtralargeModal"
+                          tabindex="-1"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Terms and Conditions</h5>
+
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              
+                              <div class="modal-body">
+                                <p>
+                                  <b style="font-size: medium;">
+                                    Welcome to our <span style="color: #0735ff;">e-Funda</span>! By using our platform, you agree to the following terms:
+                                  </b>
+                                 
+                                </p>
+
+                                <h5>Account Usage</h5>
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Keep your account credentials confidential.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Provide accurate information during registration.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Respect the platform's guidelines for content sharing.
+                                  </li>
+                                </ol>
+
+                                <h5>Intellectual Property</h5>
+
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Respect our copyrights and trademarks.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Obtain written consent before modifying or distributing platform material.
+                                  </li>
+                                </ol>
+
+                                <h5>User Content</h5>
+
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Grant us permission to use shared content for platform improvement.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Take responsibility for the legality and appropriateness of your content.
+                                  </li>
+                                </ol>
+
+                                <h5>Privacy</h5>
+
+                                <p style="font-size: small;">
+                                  Your personal information is handled according to our Privacy Policy.
+                                </p>
+
+                                <h5>Limitation of Liability</h5>
+
+                                <p style="font-size: small;">
+                                  We strive for accuracy but cannot guarantee it. We are not liable for direct or indirect damages from platform use.
+                                </p>
+
+                                <h5>
+                                  Modifications and Termination
+                                </h5>
+
+                                <p style="font-size: small;">
+                                  We may modify or terminate the platform at any time. These terms may be updated, and continued use implies acceptance.
+                                </p>
+
+                                <h5>Governing Law</h5>
+
+                                <p style="font-size: small;">
+                                  These terms are governed by Protection of Personal Information (<b>POPI</b>) Act of South Africa.
+                                </p>
+
+                                <p style="font-size: small;">
+                                  By using our <b style="color: #0735ff;">e-learning platform</b>, you <b style="color: #0735ff;">acknowledge and accept these terms</b>. For any questions, please contact us.
+                                </p>
+                              </div>
+
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+  <!-- End #main -->
+
+  <a
+    href="#"
+    class="back-to-top d-flex align-items-center justify-content-center"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script>
+    //Query All input fields
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='';
+form_fields[2].placeholder='';
+form_fields[3].placeholder='';
+form_fields[4].placeholder='';
+form_fields[5].placeholder='';
+
+
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+}
+  </script>
+</body>
+</html>
