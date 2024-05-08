@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm
 from django.contrib import messages
 
-def register(request):
+def register_client(request):
     if request.user.is_authenticated:
         return redirect("index")
     else:
@@ -31,23 +31,25 @@ def logoutUser(request):
     return redirect("login")
 
 
-def client_login(request):
+def login_client(request):
     if request.user.is_authenticated:
-        return redirect("index")
+        return redirect("dashboard")
     else:
+        
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
 
             user = authenticate(request, username=username, password=password)
+          
             if user is not None:
                 login(request, user)
-                return redirect("section_0")
+                return redirect("dashboard")
 
             else:
                 messages.info(request, "USERNAME OR PASSWORD IS INCORRECT")
-                return render(request, "login.html")
+                return render(request, "login_client.html")
 
-        return render(request, "client_login.html")
+        return render(request, "login_client.html")
 
 

@@ -25,6 +25,8 @@ urlpatterns = [
     path('',include('website.urls')),
     path('',include('application.urls')),
     path('',include('auth_app.urls')),
+    path('',include('dashboard.urls')),
+    
 ]
 
 # Add static and media URL patterns separately
