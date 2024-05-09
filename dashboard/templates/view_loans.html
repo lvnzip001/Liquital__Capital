@@ -1,0 +1,57 @@
+{% extends "base_client.html" %}
+{% load static %}
+
+{% block content %}
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Loan Database</h1>
+      
+      </div>
+      <!-- End Page Title -->
+      {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="card d-flex justify-content-center py-2"
+        style="background-color: #69bdc394;">
+        <div class="card-body">
+          <center>
+            <h5 class="card-title">
+              Submission Successful
+
+  
+            </h5>
+          </center>
+
+          {{message}}
+        </div>
+      </div>
+      
+    {% endif %}
+    {% endfor %}
+
+      <section class="section dashboard">
+
+        
+       
+        <div class="row">
+          <div class="col-lg-12">
+            <button class="btn btn-danger btn-sm" type="button"
+            onclick="location.href='{% url 'delete_loans' %}'" style="margin:10px 0px 10px 0px">Delete Loan</button>
+
+          </div>
+        </div>
+          
+
+        <div class="card col-lg-16">
+          <div class="card-body no-padding">
+             
+
+              <table class= "table table-striped">{{ loans_df_html|safe }}</table>
+          </div>
+      </div>
+        
+
+
+      </section>
+    </main>
+
+{% endblock content %}

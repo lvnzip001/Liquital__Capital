@@ -27,13 +27,30 @@
 
 .datatable-selector {
 	padding: 6px;
+	border-radius:5px;
+	border-color:lightgrey;
+	font-size: 12px;
+	letter-spacing: 0.5px;
 }
 
+
 .datatable-input {
-	padding: 6px 12px;
+	padding: 6px;
+	border-radius:6px;
+	border-color:lightgrey;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+}
+
+label {
+    font-size: 12px !important;
+	letter-spacing: 0.5px;
+	
 }
 
 .datatable-info {
+	font-size: 12px;
+	letter-spacing: 0.5px;
 	margin: 7px 0;
 }
 
@@ -54,6 +71,8 @@
 
 .datatable-pagination a {
 	border: 1px solid transparent;
+	font-size: 12px;
+	letter-spacing: 0.5px;
 	float: left;
 	margin-left: 2px;
 	padding: 6px 12px;
@@ -64,13 +83,15 @@
 }
 
 .datatable-pagination a:hover {
-	background-color: #d9d9d9;
+	background-color: rgba(73, 2, 92, 0.225);
+	border-radius: 20px;
 }
 
 .datatable-pagination .datatable-active a,
 .datatable-pagination .datatable-active a:focus,
 .datatable-pagination .datatable-active a:hover {
-	background-color: #d9d9d9;
+	background-color: rgba(73, 2, 92, 0.225);
+	border-radius: 20px;
 	cursor: default;
 }
 
@@ -91,14 +112,18 @@
 
 .datatable-pagination .datatable-pagination a {
 	font-weight: bold;
+	letter-spacing: 0.5px;
 }
 
 /* TABLE */
 .datatable-table {
 	max-width: 100%;
 	width: 100%;
+	color: #000;
 	border-spacing: 0;
+	border-color: #000;
 	border-collapse: separate;
+	border-radius: 20px;
 }
 
 .datatable-table > tbody > tr > td,
@@ -107,14 +132,18 @@
 .datatable-table > tfoot > tr > th,
 .datatable-table > thead > tr > td,
 .datatable-table > thead > tr > th {
-	vertical-align: top;
-	padding: 8px 10px;
+	vertical-align: middle;
+	padding: 8px;
+	min-width: 70px;
 }
 
 .datatable-table > thead > tr > th {
 	vertical-align: bottom;
 	text-align: left;
-	border-bottom: 1px solid #d9d9d9;
+	border-bottom: 2px solid #b8b8b8;
+	color: #012970;
+	font-weight: 600;
+	letter-spacing: 0.5px;
 }
 
 .datatable-table > tfoot > tr > th {
@@ -156,12 +185,14 @@
 .datatable-sorter::before {
 	border-top: 4px solid #000;
 	bottom: 0px;
+	opacity: 0;
 }
 
 .datatable-sorter::after {
 	border-bottom: 4px solid #000;
 	border-top: 4px solid transparent;
 	top: 0px;
+	opacity: 0;
 }
 
 .datatable-ascending .datatable-sorter::after,
@@ -186,7 +217,7 @@
 }
 
 .datatable-filter-active .datatable-filter::before {
-    opacity: 0.6;
+    opacity: 0;
 }
 
 .datatable-empty {

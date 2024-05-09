@@ -1,0 +1,101 @@
+{% extends "base_client.html" %}
+{% load static %}
+
+{% block content %}
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Delete Entry</h1>
+       
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section dashboard">
+
+        
+          <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="margin:10px 0px 10px 0px">Delete All Loans</button>
+          <button class="btn btn-success btn-sm" type="button" onclick="location.href='{% url 'view_loans' %}'" style="margin:10px 0px 10px 0px">View Database</button>
+          
+
+
+      <div class="card col-lg-10">
+        <div class="card-body no-padding">
+          <table class="table table-striped datatable table-hover">
+              <thead>
+                  <tr>
+                      <th>Loan No.</th>
+                      <th>Entity</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for loan in loans %}
+                  <tr>
+                      <td>{{ loan.loan_no }}</td>
+                      <td>{{ loan.entity }}</td>
+                      <td>
+                          <form method="post">
+                              {% csrf_token %}
+                              <input type="hidden" name="loan_no" value="{{ loan.loan_no }}">
+                              <button class="btn btn-outline-danger btn-sm" type="submit" name="delete" style='border-radius:15px'>Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+    </div>
+  </div>
+
+  {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="row justify-content-center ">
+            <div class="col-lg-6 justify-content-center py-2">
+              <div class="card d-flex " style="background-color: #1a1616; color:white;">
+                  <div class="card-body padding-message">
+                    {{message}}
+                  </div>
+              </div>
+          </div>
+        </div>
+      
+    {% endif %}
+    {% endfor %}
+       
+
+
+      </section>
+    </main>
+
+    <div class="modal fade" id="verticalycentered" tabindex="-1">
+      <div class="modal-dialog help-modal modal-dialog-centered">
+        <div class="modal-content help-conten">
+          <div class="modal-header">
+            <h5 class="modal-title" style="font-size: 14px; font-weight: bold">Delete File </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body pagetitle" style="text-align: justify;">
+            
+            
+            <p style="font-size: 16px; color: #012970; font-weight:500">
+                You are about to delete all entries, are you sure? 
+            </p>
+        
+            <form method="POST" action="">
+              {% csrf_token %}
+        
+              <div class="modal-button-container ">
+                <button type="button" class="btn-outline-dark btn btn-sm" data-bs-dismiss="modal"
+                        style="width:100px; border-radius: 15px; margin: 5px">Cancel</button>
+                <button class="btn btn-outline-danger btn-sm" type="submit" name="delete_all"
+                        style="width:100px; border-radius: 15px; margin: 5px">Yes, Delete</button>
+            </div>
+          </form>
+        </div>
+       
+        </div>
+      </div>
+    </div><!-- End Vertically centered Modal-->
+
+{% endblock content %}
