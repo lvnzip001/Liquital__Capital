@@ -7,6 +7,8 @@ urlpatterns = [
     path('datatable', views_dashboard.datatable, name='datatable'),
     path('view_loans', views_dashboard.view_loans, name='view_loans'),
     path('delete_loans', views_dashboard.delete_loans, name='delete_loans'),
+    path('analysis_table', views_dashboard.analysis_table, name='analysis_table'),
+    
     
     
     path('convert-to-df/<str:tbl>/', views_dashboard.submit_upload, name='submit_upload'),

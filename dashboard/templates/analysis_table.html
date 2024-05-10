@@ -34,10 +34,9 @@
        
         <div class="row">
           <div class="col-lg-12">
-            <button class="btn btn-danger btn-sm" type="button"
-            onclick="location.href='{% url 'delete_loans' %}'" style="margin:10px 0px 10px 0px">Delete Loan</button>
+           
             <button class="btn btn-primary btn-sm" type="button"
-            onclick="location.href='{% url 'analysis_table' %}'" style="margin:10px 0px 10px 0px">Analysis Table</button>
+            onclick="location.href='{% url 'view_loans' %}'" style="margin:10px 0px 10px 0px">View Loan Database</button>
           </div>
         </div>
           
@@ -46,7 +45,7 @@
           <div class="card-body no-padding">
              
 
-              <table class= "table table-striped">{{ loans_df_html|safe }}</table>
+              <table>{{ df_analysis_html|safe }}</table>
           </div>
       </div>
         

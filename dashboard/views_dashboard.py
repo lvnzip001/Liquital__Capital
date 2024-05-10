@@ -199,3 +199,89 @@ def delete_loans(request):
 
     loans = LoanDatabase.objects.all()
     return render(request, 'view_loans_delete.html', {'loans': loans})
+
+
+def analysis_process(df):
+    # Convert 'deployment_date' to datetime
+    df['deployment_date'] = pd.to_datetime(df['deployment_date'])
+    df['month_year'] = df['deployment_date'].dt.to_period('M')
+    
+    # Initialize the DataFrame for summarization
+    summary_df = pd.DataFrame(index=pd.period_range(df['deployment_date'].min(), df['deployment_date'].max(), freq='M'))
+    
+    # Financial categories
+    summary_df['# of Loans Advanced'] = df.groupby('month_year').size()
+    summary_df['Value of Loans Advanced'] = df.groupby('month_year')['loan_amount'].sum().fillna(0)
+    summary_df['Purchase Order Financing'] = df[df['transaction_type'] == 'Purchase Order Financing'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Invoice Discounting'] = df[df['transaction_type'] == 'Invoice Discounting'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Contract Financing'] = df[df['transaction_type'] == 'Contract Financing'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Average Interest Charge'] = df.groupby('month_year')['monthly_interest_charged'].mean().fillna(0)
+    summary_df['Number of Maturities'] = df.groupby('month_year')['settlement_amount'].count()
+    summary_df['Value of Maturities'] = df.groupby('month_year')['settlement_amount'].sum()
+    summary_df['Average PD'] = df.groupby('month_year')['pd'].mean().fillna(0)
+    
+    summary_df['Mpumalanga'] = df[df['province'] == 'Mpumalanga'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Limpopo'] = df[df['province'] == 'Limpopo'].groupby('month_year')['loan_amount'].sum()
+    summary_df['KwaZulu-Natal'] = df[df['province'] == 'KwaZulu-Natal'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Free State'] = df[df['province'] == 'Free State'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Gauteng'] = df[df['province'] == 'Gauteng'].groupby('month_year')['loan_amount'].sum()
+    summary_df['North West'] = df[df['province'] == 'North West'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Northern Cape'] = df[df['province'] == 'Northern Cape'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Western Cape'] = df[df['province'] == 'Western Cape'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Eastern Cape'] = df[df['province'] == 'Eastern Cape'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Low Risk'] = df[df['risk_band'] == 'Low Risk'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Med Risk'] = df[df['risk_band'] == 'Med Risk'].groupby('month_year')['loan_amount'].sum()
+    summary_df['High Risk'] = df[df['risk_band'] == 'High Risk'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Government Entity'] = df[df['offtaker_type'] == 'Government Entity'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Public Listed'] = df[df['offtaker_type'] == 'Public Listed'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Private'] = df[df['offtaker_type'] == 'Private'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Black Owned'] = df[df['ownership'] == 'Black Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Black Female Owned'] = df[df['ownership'] == 'Black Female Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Black Female Youth Owned'] = df[df['ownership'] == 'Black Female Youth Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Black Youth Owned'] = df[df['ownership'] == 'Black Youth Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Women Owned'] = df[df['ownership'] == 'Women Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Youth Owned'] = df[df['ownership'] == 'Youth Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Non-Black Owned'] = df[df['ownership'] == 'Non-Black Owned'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Suburb'] = df[df['location'] == 'Suburb'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Township'] = df[df['location'] == 'Township'].groupby('month_year')['loan_amount'].sum()
+    summary_df['Rural'] = df[df['location'] == 'Rural'].groupby('month_year')['loan_amount'].sum()
+    
+    
+    
+    
+
+   
+
+    # Formatting outputs for currency and percentage
+    monetary_columns = ['Value of Loans Advanced','Purchase Order Financing','Invoice Discounting','Contract Financing','Number of Maturities',
+                        'Value of Maturities','Black Owned','Black Female Owned','Black Female Youth Owned','Black Youth Owned','Women Owned','Youth Owned',
+                        'Non-Black Owned','Suburb','Township','Rural','Government Entity','Public Listed','Private','Low Risk','Med Risk','High Risk','Eastern Cape','Western Cape',
+                        'Northern Cape','North West','Gauteng','Free State','KwaZulu-Natal','Limpopo','Mpumalanga']
+    for col in monetary_columns:
+        summary_df[col] = summary_df[col].fillna(0).apply(lambda x: f"R {x:,.2f}")
+
+    summary_df['Average Interest Charge'] = summary_df['Average Interest Charge'].apply(lambda x: f"{x:.2%}")
+    summary_df['Average PD'] = summary_df['Average PD'].apply(lambda x: f"{x:.2%}")
+
+    return summary_df.T  # Transpose to match your desired output format
+
+  
+    
+    
+def analysis_table(request):
+    
+    loans_df = pd.DataFrame(list(LoanDatabase.objects.all().values()))
+    
+    df = analysis_process(loans_df)
+    
+    #convert to html and remove id column
+    if 'id' in df.columns:
+        df = df.drop(columns=['id'])
+    df_html = df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    
+    return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
+    
+
+
+# of Loans Advanced
+
