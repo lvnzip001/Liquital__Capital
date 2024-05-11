@@ -8,6 +8,8 @@ urlpatterns = [
     path('view_loans', views_dashboard.view_loans, name='view_loans'),
     path('delete_loans', views_dashboard.delete_loans, name='delete_loans'),
     path('analysis_table', views_dashboard.analysis_table, name='analysis_table'),
+    path('analysis_charts', views_dashboard.analysis_charts, name='analysis_charts'),
+    
     
     
     

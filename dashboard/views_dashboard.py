@@ -12,6 +12,10 @@ import sqlite3
 from sqlalchemy import create_engine, text
 import datetime
 from django.contrib import messages
+import plotly.express as px
+import plotly.io as pio
+import plotly.graph_objects as go
+import re
 # Create your views here.
 
 def dashboard(request):
@@ -201,6 +205,35 @@ def delete_loans(request):
     return render(request, 'view_loans_delete.html', {'loans': loans})
 
 
+def analysis_table(request):
+    
+    loans_df = pd.DataFrame(list(LoanDatabase.objects.all().values()))
+    
+    if loans_df.empty:
+        messages.error(request, "Table is empty. Please upload Loans Database to generate table.")
+        df_html = loans_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+        
+        return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
+    
+    df = analysis_process(loans_df)
+    
+    #convert to html and remove id column
+    if 'id' in df.columns:
+        df = df.drop(columns=['id'])
+        
+   
+    df.columns = [f"{month.strftime('%b-%Y')}" for month in df.columns]
+
+    df_html = df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    
+    df_json = df.to_json()
+
+    # Store JSON data in session
+    request.session['analysis_table'] = df_json
+    
+    return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
+    
+
 def analysis_process(df):
     # Convert 'deployment_date' to datetime
     df['deployment_date'] = pd.to_datetime(df['deployment_date'])
@@ -265,23 +298,437 @@ def analysis_process(df):
 
     return summary_df.T  # Transpose to match your desired output format
 
-  
-    
-    
-def analysis_table(request):
+
+
+def analysis_charts(request):
+    # Retrieve the JSON data from the session
+
+    df_json = request.session.get('analysis_table')
     
     loans_df = pd.DataFrame(list(LoanDatabase.objects.all().values()))
     
-    df = analysis_process(loans_df)
-    
-    #convert to html and remove id column
-    if 'id' in df.columns:
-        df = df.drop(columns=['id'])
-    df_html = df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
-    
-    return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
+    if loans_df.empty:
+            messages.error(request, "Table is empty. Please upload Loans Database to generate table.")
+            df_html = loans_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+            
+            return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
     
 
+    if not df_json:
+        analysis_df = analysis_process(loans_df)
+    else:
+        analysis_df = pd.read_json(df_json)
+        
+    # from the loans_df 
+    number_of_loans = loans_df.shape[0]
+    total_loan_amount = loans_df['loan_amount'].sum()/ 1000000
+    total_loan_amount = round(total_loan_amount, 2)
+    average_loan_amount = loans_df['loan_amount'].mean()/1000
+    average_loan_amount = round(average_loan_amount, 1)
+    total_settlement_amount = loans_df['settlement_amount'].sum()/ 1000000
+    total_settlement_amount = round(total_settlement_amount, 2)
+    average_interest_charge = round(loans_df['monthly_interest_charged'].mean()*100, 2)
+    jobs_created = loans_df['jobs_created'].sum()
+    
+    
+  
+    risk_allocation_chart = plot_risk_allocation(analysis_df)
+    risk_proportions_chart = plot_risk_proportions(analysis_df)
+    loans_vs_maturities = plot_loans_vs_maturities(analysis_df)
+    loan_counts_vs_maturity_counts = plot_loan_counts_vs_maturity_counts(analysis_df)
+    transaction_type_amount = plot_transaction_type_amount(analysis_df)
+    transaction_type_proportions = plot_transaction_type_proportions(analysis_df)
+    demographic_split_per_month = plot_demographic_split_per_month(analysis_df)
+    total_demographic_split = plot_total_demographic_split(analysis_df)
+    
+    data = {
+        "number_of_loans": number_of_loans,
+        "total_loan_amount": total_loan_amount,
+        "average_loan_amount": average_loan_amount,
+        "total_settlement_amount": total_settlement_amount,
+        "average_interest_charge": average_interest_charge,
+        "jobs_created": jobs_created,
+        'risk_allocation_chart': pio.to_json(risk_allocation_chart),
+        'risk_proportions_chart': pio.to_json(risk_proportions_chart),
+        'loans_vs_maturities': pio.to_json(loans_vs_maturities),
+        'loan_counts_vs_maturity_counts': pio.to_json(loan_counts_vs_maturity_counts),
+        'transaction_type_amount': pio.to_json(transaction_type_amount),
+        'transaction_type_proportions': pio.to_json(transaction_type_proportions),
+        'demographic_split_per_month': pio.to_json(demographic_split_per_month),
+        'total_demographic_split': pio.to_json(total_demographic_split)
+        
+    }
+    
+    return render(request, 'analysis_charts.html', data)
+    
+    
+    
+    
+def layout_function(fig, xaxis_title, yaxis_title):
+    # Update layout to make the chart more professional and modern
+   
+    fig.update_layout(
+       # title='Risk Proportions Over Time',
+        xaxis=dict(title=f'{xaxis_title}', gridcolor="lightgrey", 
+                   title_font=dict(size=13, color='#012970', 
+                                   family='Arial, sans-serif')),
+        yaxis=dict(title=f'{yaxis_title}', 
+                   gridcolor="lightgrey", 
+                   title_font=dict(size=13, color='#012970', 
+                                   family='Arial, sans-serif')),
+        legend=dict(
+                orientation="h", yanchor="top", y=1.15, xanchor="center", x=0.5
+            ),
+        barmode='group',  # This ensures that bars are grouped rather than stacked
+        
+        plot_bgcolor="white",
+        shapes=[
+                dict(
+                    type="rect",
+                    xref="paper",
+                    yref="paper",
+                    x0=0,
+                    y0=0,
+                    x1=1,
+                    y1=1,
+                    line=dict(color="lightgrey", width=0.5),
+                )
+            ],
+            hoverlabel=dict(bgcolor="white", font_size=12,
+                            font_family="Rockwell"),
+        font=dict(
+            family="Arial, sans-serif",
+            size=12,
+            color="black"
+        )
+    )
+    
+    # Optionally, you can make the chart responsive to window and container size
+    fig.update_layout(autosize=True)
+    
+    return fig
 
+def plot_risk_allocation(df):
+    # Assuming df contains risk allocation data with currency formatted as strings
+    # Clean currency strings and convert to float for plotting
+    for risk_level in ['Low Risk', 'Med Risk', 'High Risk']:
+        if risk_level in df.index:
+            df.loc[risk_level] = df.loc[risk_level].replace('[^\d.]', '', regex=True).astype(float)
+
+    # Now aggregate the cleaned data across all months
+    risk_data = df.loc[['Low Risk', 'Med Risk', 'High Risk']].sum(axis=1)
+
+    # Colors for each risk level
+    colors = ['#17BEBB', '#2E5266', '#FF6B6B']  # Modern color palette
+
+    # Generate the pie chart
+    fig = go.Figure(data=[go.Pie(
+        labels=risk_data.index,
+        values=risk_data.values,
+        marker=dict(colors=colors),
+        textinfo='percent+label',
+        textposition='inside',
+        insidetextfont=dict(color='white', size=13),
+        hole=0.35  # Optional: create a donut-like pie chart
+    )])
+
+    # Update layout for a modern and professional look
+    fig.update_layout(
+        
+        title_font=dict(size=16, color='#012970', family='Arial, sans-serif'),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=1.2,
+            xanchor="center",
+            x=0.5
+        ),
+        plot_bgcolor="white",
+        font=dict(
+            family="Arial, sans-serif",
+            size=12,
+            color="black"
+        ),
+            hoverlabel=dict(bgcolor="white", font_size=12,
+                            font_family="Rockwell"))
+
+    # Optionally, you can make the chart responsive to window and container size
+    fig.update_layout(autosize=True)
+
+    return fig
+
+def plot_transaction_type_proportions(df):
+    # Sum all months for each transaction type
+    transaction_totals = df.sum(axis=1)
+    transaction_types = ['Purchase Order Financing', 'Invoice Discounting', 'Contract Financing']
+    values = [transaction_totals.loc[type] for type in transaction_types]
+
+    # Create the pie chart
+    fig = go.Figure(data=[go.Pie(
+        labels=transaction_types,
+        values=values,
+        marker=dict(colors=['#17BEBB', '#2E5266', '#FF6B6B']),
+        textinfo='percent+label',
+        insidetextfont=dict(color='white', size=14),
+        hole=0.35  # Optional: create a donut-like pie chart
+    )])
+
+    fig.update_layout(
+        
+        title_font=dict(size=16, color='#012970', family='Arial, sans-serif'),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=1.3,
+            xanchor="center",
+            x=0.5
+        ),
+        plot_bgcolor="white",
+        font=dict(
+            family="Arial, sans-serif",
+            size=12,
+            color="black"
+        ),
+        hoverlabel=dict(bgcolor="white", font_size=12,
+                            font_family="Rockwell")
+        )
+
+    # Optionally, you can make the chart responsive to window and container size
+    fig.update_layout(autosize=True)
+
+    return fig
+
+def plot_total_demographic_split(df):
+    # Aggregate total loan amounts across all months for each category
+    categories = ['Black Owned', 'Black Female Owned', 'Black Female Youth Owned', 
+                  'Black Youth Owned', 'Women Owned', 'Youth Owned', 'Non-Black Owned']
+    total_per_category = df.loc[categories].sum(axis=1)
+
+    # Create the pie chart
+    fig = go.Figure(data=[go.Pie(
+        labels=categories,
+        values=total_per_category,
+        marker=dict(colors=['#17BEBB', '#2E5266', '#FF6B6B', '#57CC99', '#6E85B2', '#5A189A', '#B56576']),
+        textinfo='percent+label',
+        insidetextfont=dict(color='white', size=13),
+        hole=0.35  # Optional: create a donut-like pie chart
+    )])
+
+    fig.update_layout(
+        legend=dict(orientation="h",font=dict(size=10), yanchor="bottom", y=1, xanchor="center", x=0.5,   traceorder="normal",
+        itemwidth=30)
+    )
+
+    return fig
+
+
+
+def plot_risk_proportions(df):
+    # Assuming df contains the risk proportions data with currency formatted as strings
+    # Convert formatted currency strings back to floats
+    for column in df.columns:
+        df[column] = df[column].replace('[^\d.]', '', regex=True).astype(float)
+
+    # Transpose the DataFrame to get months as x-axis (dates) and risk categories as different series
+    df = df.T  # Now index should be dates and columns will be risk categories
+    
+    colors = ['#17BEBB', '#2E5266', '#FF6B6B']  # Adjust these colors as needed
+
+    # Create a bar for each risk category
+    fig = go.Figure()
+    for i, risk_category in enumerate(['Low Risk', 'Med Risk', 'High Risk']):
+        fig.add_trace(go.Bar(
+            x=df.index, 
+            y=df[risk_category], 
+            name=risk_category,
+            marker_color=colors[i]  # Use the modern color palette
+        ))
+
+    # Update layout
+    fig = layout_function(fig, 'Month', 'Total Amount (R)')
+    
+    return fig
+
+
+def plot_loans_vs_maturities(df):
+    # Extract the dates from the columns for the x-axis
+    dates = df.columns
+    
+    # Extract values for Loans Advanced and Maturities from the DataFrame rows
+    loans_advanced = df.loc['Value of Loans Advanced']
+    maturities_value = df.loc['Value of Maturities']
+
+    # Create figure
+    fig = go.Figure()
+
+    # Add trace for Loans Advanced
+    fig.add_trace(go.Scatter(
+        x=dates,
+        y=loans_advanced,
+        mode='lines+markers',
+        name='Loans Advanced',
+        line=dict(color='#17BEBB')
+    ))
+
+    # Add trace for Maturities
+    fig.add_trace(go.Scatter(
+        x=dates,
+        y=maturities_value,
+        mode='lines+markers',
+        name='Maturities',
+        line=dict(color='#FF6B6B')
+    ))
+
+    # Update layout
+    fig = layout_function(fig, 'Month', 'Total Amount (R)')
+    
+
+    return fig
+
+def plot_loan_counts_vs_maturity_counts(df):
+    # Extract the dates from the columns for the x-axis
+    dates = df.columns
+    
+    # Extract values for Number of Loans Advanced and Number of Maturities
+    loans_count = df.loc['# of Loans Advanced']
+    maturities_count = df.loc['Number of Maturities']
+
+    # Create figure
+    fig = go.Figure()
+
+    # Add trace for Number of Loans Advanced
+    fig.add_trace(go.Scatter(
+        x=dates,
+        y=loans_count,
+        mode='lines+markers',
+        name='Loans Advanced',
+        line=dict(color='#2E5266')
+    ))
+
+    # Add trace for Number of Maturities
+    fig.add_trace(go.Scatter(
+        x=dates,
+        y=maturities_count,
+        mode='lines+markers',
+        name='Maturities',
+        line=dict(color='#FFC914')
+    ))
+
+    # Update layout
+    fig = layout_function(fig, 'Month', 'Total Amount (R)')
+
+    return fig
 # of Loans Advanced
+
+def plot_transaction_type_amount(df):
+    # Assuming the DataFrame structure you provided, extracting specific rows for plotting
+    purchase_order_financing = df.loc['Purchase Order Financing']
+    invoice_discounting = df.loc['Invoice Discounting']
+    contract_financing = df.loc['Contract Financing']
+
+    # Dates for x-axis
+    dates = df.columns
+
+    # Create figure
+    fig = go.Figure()
+
+    # Add traces for each transaction type
+    fig.add_trace(go.Bar(
+        x=dates,
+        y=purchase_order_financing,
+        name='Purchase Order Financing',
+        marker_color='#17BEBB'
+    ))
+
+    fig.add_trace(go.Bar(
+        x=dates,
+        y=invoice_discounting,
+        name='Invoice Discounting',
+        marker_color='#2E5266'
+    ))
+
+    fig.add_trace(go.Bar(
+        x=dates,
+        y=contract_financing,
+        name='Contract Financing',
+        marker_color='#FF6B6B'
+    ))
+
+    # Update layout
+    fig = layout_function(fig, 'Month', 'Total Amount (R)')
+
+    return fig
+
+def plot_demographic_split_per_month(df):
+  
+    df.columns = pd.to_datetime(df.columns).strftime('%Y-%b')  # for month-year format
+    #df.columns = pd.to_datetime(df.columns).to_period('M').to_timestamp()
+    # Normalize each category by the total loans advanced per month to get percentages
+    categories = ['Black Owned', 'Black Female Owned', 'Black Female Youth Owned', 
+                  'Black Youth Owned', 'Women Owned', 'Youth Owned', 'Non-Black Owned']
+    total_per_month = df.loc['Value of Loans Advanced', :]
+
+   
+    # Calculating percentages
+    df_percent = df.loc[categories].div(total_per_month) * 100
+    
+    # Colors for the categories
+    colors = ['#17BEBB', '#2E5266', '#FF6B6B', '#57CC99', '#6E85B2', '#5A189A', '#B56576']
+
+    # Create the figure
+    fig = go.Figure()
+    for i, category in enumerate(categories):
+        fig.add_trace(go.Bar(
+            x=df_percent.columns, 
+            y=df_percent.loc[category],
+            name=category,
+            marker_color=colors[i]
+        ))
+
+    # Update the layout for a 100% stacked bar chart
+    fig.update_layout(
+        barmode='relative',  # Relative barmode for 100% stacking
+    )
+    
+    fig.update_layout(
+        xaxis=dict(title='Month', 
+                   gridcolor="lightgrey", 
+                   tickvals=df.columns,  # Set tickvals to the exact columns (months)
+                   ticktext=df.columns,  # Optional: Set custom text for each tick
+                   title_font=dict(size=13, color='#012970', 
+                                   family='Arial, sans-serif')),
+        yaxis=dict(title='Percentage (%)', 
+                   gridcolor="lightgrey", 
+                   tickformat=',.2f',
+                   title_font=dict(size=13, color='#012970', 
+                                   family='Arial, sans-serif',
+                                   )),
+        legend=dict(
+                orientation="h", yanchor="top", y=1.25, xanchor="center", x=0.5
+            ),
+        
+        plot_bgcolor="white",
+        shapes=[
+                dict(
+                    type="rect",
+                    xref="paper",
+                    yref="paper",
+                    x0=0,
+                    y0=0,
+                    x1=1,
+                    y1=1,
+                    line=dict(color="lightgrey", width=0.5),
+                )
+            ],
+            hoverlabel=dict(bgcolor="white", 
+                            font_size=12,
+                            font_family="Rockwell"),
+        font=dict(
+            family="Arial, sans-serif",
+            size=12,
+            color="black"
+        )
+    )
+    return fig
+
 
