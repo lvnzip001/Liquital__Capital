@@ -4,7 +4,7 @@
 {% block content %}
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Loan Database</h1>
+        <h1>Analysis Table</h1>
       
       </div>
       <!-- End Page Title -->
@@ -48,6 +48,21 @@
               <table>{{ df_analysis_html|safe }}</table>
           </div>
       </div>
+
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="row justify-content-center ">
+            <div class="col-lg-5 justify-content-center py-2">
+              <div class="card d-flex " style="background-color: #1a1616; color:white;">
+                  <div class="card-body padding-message">
+                    {{message}}
+                  </div>
+              </div>
+          </div>
+        </div>
+      
+    {% endif %}
+    {% endfor %}
         
 
 
