@@ -286,7 +286,7 @@ def analysis_process(df):
    
 
     # Formatting outputs for currency and percentage
-    monetary_columns = ['Value of Loans Advanced','Purchase Order Financing','Invoice Discounting','Contract Financing','Number of Maturities',
+    monetary_columns = ['Value of Loans Advanced','Purchase Order Financing','Invoice Discounting','Contract Financing',
                         'Value of Maturities','Black Owned','Black Female Owned','Black Female Youth Owned','Black Youth Owned','Women Owned','Youth Owned',
                         'Non-Black Owned','Suburb','Township','Rural','Government Entity','Public Listed','Private','Low Risk','Med Risk','High Risk','Eastern Cape','Western Cape',
                         'Northern Cape','North West','Gauteng','Free State','KwaZulu-Natal','Limpopo','Mpumalanga']
@@ -327,6 +327,7 @@ def analysis_charts(request):
     average_loan_amount = round(average_loan_amount, 1)
     total_settlement_amount = loans_df['settlement_amount'].sum()/ 1000000
     total_settlement_amount = round(total_settlement_amount, 2)
+    total_settlement_count = loans_df['settlement_amount'].count()
     average_interest_charge = round(loans_df['monthly_interest_charged'].mean()*100, 2)
     jobs_created = loans_df['jobs_created'].sum()
     
@@ -346,6 +347,7 @@ def analysis_charts(request):
         "total_loan_amount": total_loan_amount,
         "average_loan_amount": average_loan_amount,
         "total_settlement_amount": total_settlement_amount,
+        "total_settlement_count": total_settlement_count,
         "average_interest_charge": average_interest_charge,
         "jobs_created": jobs_created,
         'risk_allocation_chart': pio.to_json(risk_allocation_chart),
@@ -515,8 +517,12 @@ def plot_total_demographic_split(df):
     )])
 
     fig.update_layout(
-        legend=dict(orientation="h",font=dict(size=10), yanchor="bottom", y=1, xanchor="center", x=0.5,   traceorder="normal",
-        itemwidth=30)
+         legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=1.5,
+            xanchor="center",
+        ),
     )
 
     return fig
@@ -592,7 +598,6 @@ def plot_loan_counts_vs_maturity_counts(df):
     # Extract values for Number of Loans Advanced and Number of Maturities
     loans_count = df.loc['# of Loans Advanced']
     maturities_count = df.loc['Number of Maturities']
-
     # Create figure
     fig = go.Figure()
 

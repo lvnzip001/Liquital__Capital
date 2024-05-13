@@ -57,6 +57,10 @@ td {
   display: flex;
   justify-content: flex-end; /* Aligns the children (buttons) to the right */
 }
+
+rect.bg {
+  min-width: 450px !important;
+}
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
