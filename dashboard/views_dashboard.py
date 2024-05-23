@@ -301,10 +301,8 @@ def analysis_process(df):
 
 
 def analysis_charts(request):
-    # Retrieve the JSON data from the session
 
     df_json = request.session.get('analysis_table')
-    
     loans_df = pd.DataFrame(list(LoanDatabase.objects.all().values()))
     
     if loans_df.empty:
@@ -313,12 +311,16 @@ def analysis_charts(request):
             
             return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
     
-
-    if not df_json:
-        analysis_df = analysis_process(loans_df)
-    else:
-        analysis_df = pd.read_json(df_json)
+    #if none 
+    if df_json is None:
         
+        analysis_df = analysis_process(loans_df)
+        
+        analysis_df.columns = [f"{month.strftime('%b-%Y')}" for month in analysis_df.columns]
+    else:
+ 
+        analysis_df = pd.read_json(df_json)
+   
     # from the loans_df 
     number_of_loans = loans_df.shape[0]
     total_loan_amount = loans_df['loan_amount'].sum()/ 1000000
@@ -331,8 +333,6 @@ def analysis_charts(request):
     average_interest_charge = round(loans_df['monthly_interest_charged'].mean()*100, 2)
     jobs_created = loans_df['jobs_created'].sum()
     
-    
-  
     risk_allocation_chart = plot_risk_allocation(analysis_df)
     risk_proportions_chart = plot_risk_proportions(analysis_df)
     loans_vs_maturities = plot_loans_vs_maturities(analysis_df)
@@ -358,12 +358,9 @@ def analysis_charts(request):
         'transaction_type_proportions': pio.to_json(transaction_type_proportions),
         'demographic_split_per_month': pio.to_json(demographic_split_per_month),
         'total_demographic_split': pio.to_json(total_demographic_split)
-        
     }
     
-    return render(request, 'analysis_charts.html', data)
-    
-    
+    return render(request, 'analysis_charts.html', data)        
     
     
 def layout_function(fig, xaxis_title, yaxis_title):
@@ -381,8 +378,7 @@ def layout_function(fig, xaxis_title, yaxis_title):
         legend=dict(
                 orientation="h", yanchor="top", y=1.15, xanchor="center", x=0.5
             ),
-        barmode='group',  # This ensures that bars are grouped rather than stacked
-        
+        barmode='group',
         plot_bgcolor="white",
         shapes=[
                 dict(
@@ -520,7 +516,7 @@ def plot_total_demographic_split(df):
          legend=dict(
             orientation="h",
             yanchor="top",
-            y=1.5,
+            y=1.4,
             xanchor="center",
         ),
     )
@@ -665,7 +661,8 @@ def plot_transaction_type_amount(df):
     return fig
 
 def plot_demographic_split_per_month(df):
-  
+    
+    #df.columns = df.columns.timestamp()
     df.columns = pd.to_datetime(df.columns).strftime('%Y-%b')  # for month-year format
     #df.columns = pd.to_datetime(df.columns).to_period('M').to_timestamp()
     # Normalize each category by the total loans advanced per month to get percentages

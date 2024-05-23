@@ -33,7 +33,7 @@ def logoutUser(request):
 
 def login_client(request):
     if request.user.is_authenticated:
-        return redirect("dashboard")
+        return redirect("analysis_charts")
     else:
         
         if request.method == "POST":
