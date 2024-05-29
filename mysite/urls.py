@@ -26,6 +26,7 @@ urlpatterns = [
     path('',include('application.urls')),
     path('',include('auth_app.urls')),
     path('',include('dashboard.urls')),
+    path('',include('credit_model.urls')),
     
 ]
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="\styling\form.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="form">
+            <form action="/home" method="post">
+
+                <p>Upload a file to fill in the below information</p>
+                <input type="file" id="myFile" name="filename">
+
+                <label for="entity">Entity Name</label>
+                <input name="amount" id="entity" type="text"required>
+
+                <label for="funding_type">Funding Type</label>
+                <select name="funding_type" id="funding_type">
+                    <option value="PO">Purchase Order Financing</option>
+                    <option value="Invoice">Invoice Discounting</option>
+                    <option value="Contract">Contract Financing</option>
+                </select>
+
+                <label for="track_record">Track record with the fund</label>
+                <input name="track_record" id="track_record" type="number"required>
+            
+                <label for="Management_Behavioural_Risk">Management Behavioural Risk</label>
+                <input name="Management_Behavioural_Risk" id="Management_behavioural_risk" type="number"required>
+
+                <input type="submit">
+
+            </form>
+        </div>
+    </body>
+</html>

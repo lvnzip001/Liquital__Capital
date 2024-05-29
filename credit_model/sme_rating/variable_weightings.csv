@@ -1,0 +1,18 @@
+﻿Variable,Purchase Order Financing,Invoice Discounting,Contract Financing
+No. similar transactions completed,0.15,0,0.15
+Sourcing of  the Service Rendered,0.05,0,0.05
+Likelihood of service delivery delay,0.125,0,0.12
+Debt Service Cover Ratio,0.05,0.075,0.05
+Current Ratio,0.025,0.075,0.025
+Debt ratio (D/A),0.025,0.05,0.025
+Number of Cash inflows from off-taker,0.05,0.1,0.05
+Past disputes with off-taker,0.05,0.075,0.05
+Off-taker reputational risk,0.05,0.075,0.05
+Term to loan settlement (weeks),0.05,0.05,0.05
+Reputational risk,0.025,0,0.025
+Variety of supplier base,0.025,0,0.025
+Number of times the SME has used the supplier,0.025,0,0.025
+Unencumbered Assets to the Unsecured Debt,0.075,0.125,0.075
+Liquid Asset Loan Coverage Ratio,0.075,0.125,0.075
+Timing of liquid assets repayment,0.075,0.125,0.075
+Quality of liquid security loan coverage,0.075,0.125,0.075

@@ -1,0 +1,8 @@
+Rating,Score
+AAA,4.65
+AA,3.8
+A,3.15
+BBB,2.6
+BB,2.15
+B,1.75
+CCC,1.3

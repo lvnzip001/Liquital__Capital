@@ -1,0 +1,18 @@
+Variable,Factor,AAA,AA,A,BBB,BB,B,CCC
+No. similar transactions completed,Contract Performance Risk,6,5,4,3,2,1,0
+Sourcing of  the Service Rendered,Contract Performance Risk,Fully Insourced,Sufficiently Insourced,Significatly Insourced,Partially Outsourced,Partly Outsourced,Significatly Outsourced,Fully Outsourced
+Likelihood of service delivery delay,Contract Performance Risk,Highly Unlikely,Unlikely,Limited Chance,Partially Likely,Partly Likely,Significatly Likely,Highly Likely
+Debt Service Cover Ratio,Off-Taker Payment Risk,2,1.75,1.5,1.25,1,0.75,0.5
+Current Ratio,Off-Taker Payment Risk,2,1.75,1.5,1.25,1,0.75,0.5
+Debt ratio (D/A),Off-Taker Payment Risk,0.5,0.55,0.6,0.65,0.7,0.75,0.8
+Number of Cash inflows from off-taker,Off-Taker Payment Risk,6,5,4,3,2,1,0
+Past disputes with off-taker,Off-taker Risk,None,Immaterial,Not Significant,material but resolved,material but not resolved,Extreme Conflict,Irreconcilable
+Off-taker reputational risk,Off-taker Risk,Solid,Intact,Immaterial,Partially Tainted,Partly Tainted,Overly Tainted,Totally Tainted
+Term to loan settlement (weeks),Off-taker Risk,2,3,4,5,6,7,8
+Reputational risk,Supplier Risk,Solid,Intact,Immaterial,Partially Tainted,Partly Tainted,Overly Tainted,Totally Tainted
+Variety of supplier base,Supplier Risk,Superior,Excellent,Good,Moderate,Limited,Weak,Poor
+Number of times the SME has used the supplier,Supplier Risk,6,5,4,3,2,1,0
+Unencumbered Assets to the Unsecured Debt,Security and Collateral Risk,2,1.75,1.5,1.25,1,0.75,0.5
+Liquid Asset Loan Coverage Ratio,Security and Collateral Risk,1.5,1.25,1,0.75,0.5,0.25,0.2
+Timing of liquid assets repayment,Security and Collateral Risk,1,0.9,0.8,0.7,0.6,0.5,0.4
+Quality of liquid security loan coverage,Security and Collateral Risk,0.8,0.7,0.6,0.5,0.4,0.3,0.2

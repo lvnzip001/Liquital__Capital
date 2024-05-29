@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+<center>
+<h2>Registered SME's</h2>
+<hr>
+<p> 
+  Choose company and generate credit rating report
+</p>
+{% if entity_names %}  
+{% for i in entity_names %}
+<p>
+  {% if i.company_0 %}
+  <a href="{% url 'registered_data_input' i.company_0 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_0}}</a>
+  {% endif %}
+
+  {% if i.company_1 %}
+  <a href="{% url 'registered_data_input' i.company_1 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_1}}</a>
+  {% endif %}
+
+  {% if i.company_2 %}
+  <a href="{% url 'registered_data_input' i.company_2 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_2}}</a>
+  {% endif %}
+
+  {% if i.company_3 %}
+  <a href="{% url 'registered_data_input' i.company_3 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_3}}</a>
+  {% endif %}
+
+  {% if i.company_4 %}
+  <a href="{% url 'registered_data_input' i.company_4 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_4}}</a>
+  {% endif %}
+
+  {% if i.company_5 %}
+  <a href="{% url 'registered_data_input' i.company_5 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_5}}</a>
+  {% endif %}
+
+  {% if i.company_6 %}
+  <a href="{% url 'registered_data_input' i.company_6 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_6}}</a>
+  {% endif %}
+
+
+  {% if i.company_7 %}
+  <a href="{% url 'registered_data_input' i.company_7 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_7}}</a>
+  {% endif %}
+
+  {% if i.company_8 %}
+  <a href="{% url 'registered_data_input' i.company_8 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_8}}</a>
+  {% endif %}
+
+  {% if i.company_9 %}
+  <a href="{% url 'registered_data_input' i.company_9 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_9}}</a>
+  {% endif %}
+
+  {% if i.company_10 %}
+  <a href="{% url 'registered_data_input' i.company_10 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_10}}</a>
+  {% endif %}
+
+  {% if i.company_11 %}
+  <a href="{% url 'registered_data_input' i.company_11 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_11}}</a>
+  {% endif %}
+
+</p>
+</center>
+{% endfor %}
+{% else %}
+<p> 
+  There are currently no entities added
+</p>
+
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
