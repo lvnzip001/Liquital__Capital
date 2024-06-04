@@ -2174,7 +2174,8 @@ second-color{
 }
 
 .pricing .featured {
-  background: #071447;
+  /* background: #071447; */
+  background: #0b2137;
 }
 
 .pricing .featured h3,
