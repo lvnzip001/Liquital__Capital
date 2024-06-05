@@ -11,9 +11,37 @@ def convertToDataFrame(dictionary):
         return pd.DataFrame.from_dict(dictionary)
 
 
-def extractData(filename):
+# def extractData(filename):
    
     
+#     with open(filename) as f:
+#         lines = (line.rstrip() for line in f)
+#         lines = list(line for line in lines if line)
+#         breakpoint()
+#     # comma-seperated file so we split by using "commas"
+#     headings = lines[0].split(",")
+#     # create a list of key-value items/dictionaries (heading-data items)
+#     rows = lines[1:]
+#     companies = []
+#     dataFrames = []
+#     for row in rows:
+#         company = {}
+#         data = row.split(",")
+#         #if data[0]== 'Pirates (Pty) Ltd':
+#         #    breakpoint()
+#         for i in range(len(data)):
+#             try:
+#                 company[headings[i]] = data[i]
+#                 companies.append(company)
+#             except:
+#                 continue
+            
+        
+
+#     return companies
+
+def extractData(filename):
+    count = 0
     with open(filename) as f:
         lines = (line.rstrip() for line in f)
         lines = list(line for line in lines if line)
@@ -29,13 +57,14 @@ def extractData(filename):
         #if data[0]== 'Pirates (Pty) Ltd':
         #    breakpoint()
         for i in range(len(data)):
-            try:
-                company[headings[i]] = data[i]
-                companies.append(company)
-            except:
-                continue
             
-        
+            company
+            count += 1
+            company[headings[i]] = data[i]
+           
+       
+            
+        companies.append(company)
 
     return companies
 
@@ -88,8 +117,10 @@ def liquidAssetLoanCoverageRatio(outstandingInvoicesTotal, requiredFunding):
 def addDebtServiceCoverageRatio(company):
     """Adds the ratio calculations which would happen to the InputData sheet and deletes the existing value key pairs"""
    
-
-    operatingIncome = company["Off-Taker Net Operating Income"]
+    try:
+        operatingIncome = company["Off-Taker Net Operating Income"]
+    except:
+        breakpoint()
     del company["Off-Taker Net Operating Income"]
     interestExpense = company["Interest Expense"]
     del company["Interest Expense"]
@@ -154,6 +185,7 @@ def liquid_assets_repayment(company):
 def updateData(companies):
     for company in companies:
         # add "Debt Service Coverage Ratio"
+       
         addDebtServiceCoverageRatio(company)
         # add "Current Ratio"
         addCurrentRatio(company)
@@ -183,16 +215,17 @@ def getCompanyData(filename):
     return company
 
 
-def getCompanyData_t(filename="dummy_companies.txt"):
-    """Function that returns the inoput data of the files"""
-    # step ONE: extract data and store it in a dictionary (map)
-    # TODO change this back to companies
-    company = extractData(filename)
-    companies_1 = extractData(filename)
+# def getCompanyData_t(filename="dummy_companies.txt"):
+#     """Function that returns the inoput data of the files"""
+#     # step ONE: extract data and store it in a dictionary (map)
+#     # TODO change this back to companies
+#     breakpoint()
+#     company = extractData(filename)
+#     companies_1 = extractData(filename)
 
-    updateData(company)
+#     updateData(company)
 
-    return company, companies_1
+#     return company, companies_1
 
 
 def getcompanybyname(company_name, filename):
@@ -220,6 +253,7 @@ def getallcompanynames(filename):
     # step ONE: extract data and store it in a dictionary (map)
     # TODO change this back to companies
     companies = extractData(filename)
+
     updateData(companies)
 
     name_dict = {}

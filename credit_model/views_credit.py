@@ -135,7 +135,7 @@ def data_input(request):
             last_object = Credit_Model_Input.objects.all().last()
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
             add_to_csv_file(filename=company_data, excel_input_file=last_object_location)
-
+            
             company_name = getCompanyData(company_data)[0]["Entity Name"]
             companies = [getcompanybyname(company_name)]
 

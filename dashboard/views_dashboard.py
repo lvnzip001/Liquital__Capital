@@ -28,7 +28,7 @@ def datatable(request):
     return render(request, "datatable.html")
 
 
-def data_input(request):
+def data_input_analysis(request):
     if request.method == "POST":
         form = GradeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -40,14 +40,14 @@ def data_input(request):
             # Your code here
             return render(
                 request,
-                "data_input.html",
+                "data_input_analysis.html",
                 {"df_html": df_html, "form": form,
                     "tbl": "LoanDatabase"},
             )
     else:
         form = GradeForm()
       
-    return render(request, "data_input.html", {"form": form})
+    return render(request, "data_input_analysis.html", {"form": form})
 
 
 def excel_upload_view(instance):
