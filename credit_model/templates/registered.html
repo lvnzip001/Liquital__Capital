@@ -1,82 +1,69 @@
-{% extends 'base.html' %}
+{% extends 'base_client.html' %}
 
 {% block content %}
 
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Registered SME's</h1>
+  
+  </div>
+  <!-- End Page Title -->
+ 
+  <section class="section dashboard">
+
+
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-10 col-md-12">
-      <div class="card mb-4">
+    <div class="col-lg-11 col-md-12">
+      <div class="card mb-4 shadow-sm">
         <div class="card-body">
-<center>
-<h2>Registered SME's</h2>
-<hr>
-<p> 
-  Choose company and generate credit rating report
-</p>
-{% if entity_names %}  
-{% for i in entity_names %}
-<p>
-  {% if i.company_0 %}
-  <a href="{% url 'registered_data_input' i.company_0 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_0}}</a>
-  {% endif %}
-
-  {% if i.company_1 %}
-  <a href="{% url 'registered_data_input' i.company_1 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_1}}</a>
-  {% endif %}
-
-  {% if i.company_2 %}
-  <a href="{% url 'registered_data_input' i.company_2 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_2}}</a>
-  {% endif %}
-
-  {% if i.company_3 %}
-  <a href="{% url 'registered_data_input' i.company_3 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_3}}</a>
-  {% endif %}
-
-  {% if i.company_4 %}
-  <a href="{% url 'registered_data_input' i.company_4 %}"   class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_4}}</a>
-  {% endif %}
-
-  {% if i.company_5 %}
-  <a href="{% url 'registered_data_input' i.company_5 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_5}}</a>
-  {% endif %}
-
-  {% if i.company_6 %}
-  <a href="{% url 'registered_data_input' i.company_6 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_6}}</a>
-  {% endif %}
-
-
-  {% if i.company_7 %}
-  <a href="{% url 'registered_data_input' i.company_7 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_7}}</a>
-  {% endif %}
-
-  {% if i.company_8 %}
-  <a href="{% url 'registered_data_input' i.company_8 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_8}}</a>
-  {% endif %}
-
-  {% if i.company_9 %}
-  <a href="{% url 'registered_data_input' i.company_9 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_9}}</a>
-  {% endif %}
-
-  {% if i.company_10 %}
-  <a href="{% url 'registered_data_input' i.company_10 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_10}}</a>
-  {% endif %}
-
-  {% if i.company_11 %}
-  <a href="{% url 'registered_data_input' i.company_11 %}"  class = "btn btn-outline-info  btn-sm btn-block" style="height:50px;width:500px;" text-align="center" >{{i.company_11}}</a>
-  {% endif %}
-
-</p>
-</center>
-{% endfor %}
-{% else %}
-<p> 
-  There are currently no entities added
-</p>
-
-{% endif %}
+          <h2 class='subheader_label text-center' style="font-size:22px">Choose a company and generate a credit rating report</h2>
+          <hr>
+        
+          <input type="text" id="searchInput" onkeyup="filterCompanies()" placeholder="Search for companies..." class="form-control mb-4">
+          {% if entity_names %}
+            <div class="row" id="companyList">
+              {% for entity in entity_names %}
+                {% for key, value in entity.items %}
+                  <div class="col-md-6 col-lg-4 mb-3 company-item">
+                    <a href="{% url 'registered_data_input' value %}" class="btn btn-outline-primary btn-block company-btn">
+                      {{ value }}
+                    </a>
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
+          {% else %}
+            <p>There are currently no entities added</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+
+</section>
+</main>
+
+
+
+<script>
+function filterCompanies() {
+  var input, filter, companyList, companyItems, a, i, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  companyList = document.getElementById("companyList");
+  companyItems = companyList.getElementsByClassName("company-item");
+  for (i = 0; i < companyItems.length; i++) {
+    a = companyItems[i].getElementsByClassName("company-btn")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      companyItems[i].style.display = "";
+    } else {
+      companyItems[i].style.display = "none";
+    }
+  }
+}
+</script>
 {% endblock %}

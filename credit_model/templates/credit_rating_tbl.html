@@ -1,106 +1,125 @@
-{% extends 'base.html' %}
+{% extends 'base_client.html' %}
 
 {% block content %}
 {% load crispy_forms_tags %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
-  <title>TableView - Startup</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
-<body>
-  
-<div class="container">
-   {% if d2 %}  
-   {% for i in d2 %}
-  <h2 class="text-center"> {{i.Entity_Name}} Credit Rating. {{i.Funding_Type}} Funding Type  </h2>
-  {% endfor %}
-  {% endif %}
-  <br> 
-  <hr>           
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th>Factor</th>
-        <th>Measure</th>
-        <th>Outcome</th>
-        <th>Score</th>
-        <th>Weighting</th>
-        <th>Rating</th>
-     
-      </tr>
-    </thead>
-    <tbody>
-    <!-- jinja2 Technique -->
-    {% if d %}  
-    {% for i in d %}
-      <tr>
-        <td>{{i.factors}}</td>
-        <td>{{i.measure}}</td>
-        <td>{{i.outcomes}}</td>
-        <td>{{i.scores}}</td>
-        <td>{{i.weighting}}</td>
-        <td>{{i.rating}}</td>
-      </tr>
-    {% endfor %}
-    {% endif %}
-    </tbody>
-  </table>
-</div>
-<br>
 
-<div class="container">
-    <h2 class="text-center"> Summary</h2><br>    
-    <hr>        
-    <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th>Stand Alone Credit Score</th>
-          <th>Overall Credit Score</th>
-          <th>Probability of Default</th>
-          <th>Credit Rating</th>
-       
-       
-        </tr>
-      </thead>
-      <tbody>
-      <!-- jinja2 Technique -->
-      {% if d1 %}  
-      {% for i in d1 %}
-        <tr>
-          <td>{{i.stand_alone_credit_score}}</td>
-          <td>{{i.overall_credit_score}}</td>
-          <td>{{i.probability_of_default}}</td>
-          <td>{{i.credit_rating}}</td>
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Company Credit</h1>
+    
+    </div>
+    <!-- End Page Title -->
+   
+    <section class="section dashboard">
+
+      <div class="row">
+        <div class="col-lg-12">
+         
+          <button class="btn btn-danger btn-sm" type="button"
+          onclick="location.href='{% url 'registered' %}'" style="margin:10px 0px 10px 0px">View Registered Companies</button>
+        </div>
+      </div>
+        
+
       
-        </tr>
-      {% endfor %}
-      {% endif %}
-      </tbody>
-    </table>
+        {% if d2 %}  
+        {% for i in d2 %}
+       <h1 class="text-center header_label"> {{i.Entity_Name}} Credit Rating. {{i.Funding_Type}} Funding Type  </h1>
+       {% endfor %}
+       {% endif %}
+       <div class="card col-lg-16">
+        <div class="card-body no-padding">    
+       <table class="table datatable table-striped table-hover ">
+         <thead>
+           <tr>
+             <th>Factor</th>
+             <th>Measure</th>
+             <th>Outcome</th>
+             <th>Score</th>
+             <th>Weighting</th>
+             <th>Rating</th>
+          
+           </tr>
+         </thead>
+         <tbody>
+         <!-- jinja2 Technique -->
+         {% if d %}  
+         {% for i in d %}
+           <tr>
+             <td>{{i.factors}}</td>
+             <td>{{i.measure}}</td>
+             <td>{{i.outcomes}}</td>
+             <td>{{i.scores}}</td>
+             <td>{{i.weighting}}</td>
+             <td>{{i.rating}}</td>
+           </tr>
+         {% endfor %}
+         {% endif %}
+         </tbody>
+       </table>
+     </div>
+    </div>
 
-    <p>
-      {% if d2 %}  
-      {% for i in d2 %}
-        <a href="{% url 'data_pdf' i.Entity_Name %} " class = 'btn btn-info' style="height:40px;width:160px;" text-align="center" > Download PDF </a>
-      {% endfor %}
-      {% endif %}
-      </p>
-  </div>
+     
+     
+         <h1 class="text-center header_label"> Summary</h1>    
+         <div class="card col-lg-16">
+          <div class="card-body no-padding">      
+            <table class="table table-hover ">
+           <thead>
+             <tr>
+               <th>Stand Alone Credit Score</th>
+               <th>Overall Credit Score</th>
+               <th>Probability of Default</th>
+               <th>Credit Rating</th>
+            
+            
+             </tr>
+           </thead>
+           <tbody>
+           <!-- jinja2 Technique -->
+           {% if d1 %}  
+           {% for i in d1 %}
+             <tr>
+               <td>{{i.stand_alone_credit_score}}</td>
+               <td>{{i.overall_credit_score}}</td>
+               <td>{{i.probability_of_default}}</td>
+               <td>{{i.credit_rating}}</td>
+           
+             </tr>
+           {% endfor %}
+           {% endif %}
+           </tbody>
+         </table>
+        </div>
+      </div>
+     
+    
+           {% if d2 %}  
+           {% for i in d2 %}
+             <a href="{% url 'data_pdf' i.Entity_Name %} " class = 'btn btn-info' style="height:40px;width:160px;" text-align="center" > Download PDF </a>
+           {% endfor %}
+           {% endif %}
+      
+      
 
-  
-  
-</body>
+     
+     
+      
+      
+
+
+    </section>
+  </main>
 
 
 
-</html>
 
-{% endblock %}
+
+  {% endblock %}

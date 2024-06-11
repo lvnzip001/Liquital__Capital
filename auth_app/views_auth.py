@@ -44,7 +44,7 @@ def login_client(request):
           
             if user is not None:
                 login(request, user)
-                return redirect("dashboard")
+                return redirect("analysis_charts")
 
             else:
                 messages.info(request, "USERNAME OR PASSWORD IS INCORRECT")
