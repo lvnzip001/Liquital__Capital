@@ -90,38 +90,361 @@ rect.bg {
   color: #012970;
 }
 
-/*--------------------------------------------------------------
-# Back to top button
---------------------------------------------------------------*/
-.back-to-top {
-  position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  right: 15px;
-  bottom: 15px;
-  z-index: 99999;
-  background: #4154f1;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  transition: all 0.4s;
-}
-
-.back-to-top i {
+.header_label {
   font-size: 24px;
-  color: #fff;
-  line-height: 0;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #012970;
+  
 }
 
-.back-to-top:hover {
-  background: #6776f4;
-  color: #fff;
+.subheader_label {
+  font-size: 22px;
+  margin: 5px 0px 10px 0px;
+  font-weight: 600;
+  color: #1b645d;
+  
 }
 
-.back-to-top.active {
-  visibility: visible;
-  opacity: 1;
+/*--------------------------------------------------------------
+# registered company
+--------------------------------------------------------------*/
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  text-align: left;
+  border: 1px solid #ddd;
 }
+
+.portfolio-table th, .portfolio-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.portfolio-table th {
+  background-color: rgb(201, 140, 140);
+  color: #3a0000;
+  font-weight: bold;
+}
+
+.portfolio-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.portfolio-table a {
+  color: #017bff;
+  text-decoration: none;
+}
+
+.portfolio-table a:hover {
+  text-decoration: underline;
+}
+/* Add a border-radius to buttons */
+.company-btn {
+  border-radius: 25px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-color: #012970;
+  color: #012970;
+}
+
+/* Change background and text color on hover */
+.company-btn:hover {
+  background-color: #012970;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #012970;
+  
+}
+
+/* Add some spacing between buttons */
+.company-item {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Responsive design */
+@media (max-width: 768px) {
+  .company-btn {
+    width: 100%;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# PD Rating Table
+--------------------------------------------------------------*/
+
+.rating-table-table > tbody > tr > td,
+.rating-table-table > tbody > tr > th,
+.rating-table-table > tfoot > tr > td,
+.rating-table-table > tfoot > tr > th,
+.rating-table-table > thead > tr > td,
+.rating-table-table > thead > tr > th {
+    vertical-align: middle;
+    padding: 8px;
+    min-width: 70px;
+}
+
+.rating-table-table > thead > tr > th {
+    vertical-align: bottom;
+    text-align: left;
+    border-bottom: 2px solid #b8b8b8;
+    color: #012970;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* .rating-table-table > tfoot > tr > th {
+    vertical-align: bottom;
+    text-align: left;
+    border-top: 1px solid #d9d9d9;
+} */
+
+.rating-table-table th {
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.rating-table-table th a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.rating-table-sorter, .rating-table-filter {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.rating-table-sorter::before,
+.rating-table-sorter::after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 4px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    opacity: 0.2;
+}
+
+.rating-table-sorter::before {
+    border-top: 4px solid #000;
+    bottom: 0px;
+    opacity: 0;
+}
+
+.rating-table-sorter::after {
+    border-bottom: 4px solid #000;
+    border-top: 4px solid transparent;
+    top: 0px;
+    opacity: 0;
+}
+
+.rating-table-ascending .rating-table-sorter::after,
+.rating-table-descending .rating-table-sorter::before,
+.rating-table-ascending .rating-table-filter::after,
+.rating-table-descending .rating-table-filter::before {
+    opacity: 0.6;
+}
+
+.rating-table-filter::before {
+    content: "";
+    position: absolute;
+    right: 4px;
+    opacity: 0.2;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-radius: 50%;
+    border-top: 10px solid #000;
+    top: 25%;
+}
+
+.rating-table-filter-active .rating-table-filter::before {
+    opacity: 0;
+}
+
+.rating-table-empty {
+    text-align: center;
+}
+
+.rating-table-top::after, .rating-table-bottom::after {
+    clear: both;
+    content: " ";
+    display: table;
+}
+
+table.rating-table-table:focus tr.rating-table-cursor > td:first-child {
+    border-left: 3px blue solid;
+}
+
+table.rating-table-table:focus {
+    outline: solid 1px black;
+    outline-offset: -1px;
+}
+ .rating-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.rating-table-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: left;
+}
+.rating-table-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+.rating-table-table th,
+.rating-table-table td {
+  border: 1px solid #ddd;
+}
+/*
+.rating-table-table th,
+.rating-table-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.rating-table-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+.rating-table-table tr:hover {
+  background-color: #f1f1f1;
+} */
+
+
+
+.rating-table-table .tAAA {
+  background-color: #1b5e20; /* Dark Green */
+  color:#ffffff;
+  font-weight: 600;
+}
+
+.rating-table-table .tAAplus {
+  background-color: #388e3c; /* Light Green */
+  color:#ffffff;
+  font-weight: 600;
+}
+
+.rating-table-table .tAA {
+  background-color: #4caf50; /* Light Green */
+  color:#383535;
+  font-weight: 600;
+}
+
+.rating-table-table .tAAminus {
+  background-color: #81c784; /* Light Green */
+  color:#383535;
+  font-weight: 600;
+}
+
+.rating-table-table .tAplus {
+  background-color: #a5d6a7; /* Light Green */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tA {
+  background-color: #c8e6c9; /* Light Green */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tAminus {
+  background-color: #dcedc8; /* Light Green */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBBBplus {
+  background-color: #f0f4c3; /* Light Yellow */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBBB {
+  background-color: #ffee58; /* Yellow */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBBBminus {
+  background-color: #ffd54f; /* Orange */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBBplus {
+  background-color: #ffb74d; /* Orange */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBB {
+  background-color: #ff9800; /* Orange */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tBBminus,
+.rating-table-table .tBplus {
+  background-color: #f57c00; /* Deep Orange */
+  color:#181616;
+  font-weight: 600;
+}
+
+.rating-table-table .tB {
+  background-color: #ef6c00; /* Deep Orange */
+  color:#0a0a0a;
+  font-weight: 600;
+}
+
+.rating-table-table .tBminus {
+  background-color: #e65100; /* Deep Orange */
+  color:#000000;
+  font-weight: 600;
+}
+
+.rating-table-table .tCCCplus,
+.rating-table-table .tCCC {
+  background-color: #d32f2f; /* Red */
+  color:#ffffff;
+  font-weight: 600;
+}
+
+.rating-table-table .tCCCminus,
+.rating-table-table .tCCplus,
+.rating-table-table .tCC {
+  background-color: #b71c1c; /* Dark Red */
+  color:#ffffff;
+  font-weight: 600;
+}
+
+.rating-table-table .tCplus,
+.rating-table-table .tC {
+  background-color: #8e0000; /* Very Dark Red */
+  color:#ffffff;
+  font-weight: 600;
+}
+
 
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings
@@ -768,7 +1091,7 @@ rect.bg {
 }
 
 .sidebar-nav .nav-content a i {
-  font-size: 6px;
+  font-size: 12px;
   margin-right: 8px;
   line-height: 0;
   border-radius: 50%;

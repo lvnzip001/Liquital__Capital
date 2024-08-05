@@ -67,11 +67,12 @@
   <br>
 
   <div class="card-container row">
-
     <div class="row">
+         {% comment %} <! –– and the comment closes with ––>  {% endcomment %}
         <form
             method="post"
-            action="{% url 'submit_upload' tbl %}"
+            
+            action="{% url 'submit_upload' loan_database %}"    
         >
             {% csrf_token %}
 
@@ -95,7 +96,7 @@
                             class="btn btn-outline-danger"
                             style="margin-bottom: 15px;"
                             type="button"
-                            onclick="location.href='{% url 'data_input' %}'"
+                            onclick="location.href='{% url 'data_input_analysis' %}'"
                         >Cancel</button>
                     </div>
              
@@ -103,8 +104,7 @@
            
         </form>
 
-        
-            
+    
 
         <!-- <center>
           <button class="btn btn-sm btn-outline-info"> Submit</button>
@@ -118,13 +118,7 @@
 
                 <table class= "table table-striped">{{ df_html|safe }}</table>
             </div>
-        </div>
-  
-             
-                
-
-                       
-                  
+        </div> 
                 </div>
 
 

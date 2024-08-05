@@ -5,6 +5,12 @@
     <main id="main" class="main">
       <div class="pagetitle">
         <h1>Loan Database</h1>
+
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.html">Loan Dashboard/</a></li>
+          </ol>
+        </nav>
       
       </div>
       <!-- End Page Title -->
@@ -38,6 +44,8 @@
             onclick="location.href='{% url 'delete_loans' %}'" style="margin:10px 0px 10px 0px">Delete Loan</button>
             <button class="btn btn-primary btn-sm" type="button"
             onclick="location.href='{% url 'analysis_table' %}'" style="margin:10px 0px 10px 0px">Analysis Table</button>
+            <button class="btn btn-secondary btn-sm" type="button"
+            onclick="location.href='{% url 'portfolio_table' %}'" style="margin:10px 0px 10px 0px">Portfolio Table</button>
           </div>
         </div>
           

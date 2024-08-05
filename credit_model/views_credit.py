@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from .forms import Credit_Model_Input_Form
-from .models import Credit_Model_Input
+from .models import Credit_Model_Input, VariableWeighting, VariableScoring
 import os
 from django.conf import settings
 from mysite.settings import MEDIA_ROOT
@@ -110,10 +110,21 @@ def registered_data_input(request, company=None):
     data = json.loads(credit_rating_tbl_json)
     data.append(json.loads(company_info_json))
     data.append(json.loads(credit_score_summary_json))
+    
+    #Get required table data
+    variable_weighting_df = pd.DataFrame(list(VariableWeighting.objects.all().values()))
+    variable_weighting_df_html = variable_weighting_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    
+    variable_scoring_df = pd.DataFrame(list(VariableScoring.objects.all().values()))
+    variable_scoring_df_html = variable_scoring_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    
+    
+    context = {"d": data[:-2], 
+               "d1": data[-1], 
+               "d2": data[-2], 
+               'variable_weighting_df_html': variable_weighting_df_html,
+               "variable_scoring_df_html": variable_scoring_df_html}
 
-    context = {"d": data[:-2], "d1": data[-1], "d2": data[-2]}
-
-    print(context["d1"])
 
     return render(request, "credit_rating_tbl.html", context)
     # return HttpResponse("It kinda works for " + str(company))

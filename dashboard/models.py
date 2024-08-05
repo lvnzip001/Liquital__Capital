@@ -42,3 +42,25 @@ class LoanDatabase(models.Model):
 
     def __str__(self):
         return f"{self.entity} - {self.transaction_no}"
+    
+    
+class LoanPortfolio(models.Model):
+    date = models.DateField()
+    portfolio_pd = models.DecimalField(max_digits=5, decimal_places=2)
+    rating = models.CharField(max_length=10)
+    return_on_loan_book = models.DecimalField(max_digits=5, decimal_places=2)
+    return_on_cash = models.DecimalField(max_digits=5, decimal_places=2)
+    number_of_loans_advanced = models.IntegerField()
+    number_of_loans_outstanding = models.IntegerField()
+    loan_balance = models.DecimalField(max_digits=15, decimal_places=2)
+    accrued_interest = models.DecimalField(max_digits=15, decimal_places=2)
+    capital_balance = models.DecimalField(max_digits=15, decimal_places=2)
+    cash_balance = models.DecimalField(max_digits=15, decimal_places=2)
+    revenue = models.DecimalField(max_digits=15, decimal_places=2)
+    outstanding_debt = models.DecimalField(max_digits=15, decimal_places=2)
+    provision_for_expected_credit_losses = models.DecimalField(max_digits=15, decimal_places=2)
+
+    def __str__(self):
+        return f"Loan Portfolio as of {self.date}"
+    
+    

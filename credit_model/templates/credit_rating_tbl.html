@@ -23,6 +23,7 @@
          
           <button class="btn btn-danger btn-sm" type="button"
           onclick="location.href='{% url 'registered' %}'" style="margin:10px 0px 10px 0px">View Registered Companies</button>
+          <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="margin:10px 0px 10px 0px">Model Variables</button>
         </div>
       </div>
         
@@ -33,93 +34,434 @@
        <h1 class="text-center header_label"> {{i.Entity_Name}} Credit Rating. {{i.Funding_Type}} Funding Type  </h1>
        {% endfor %}
        {% endif %}
-       <div class="card col-lg-16">
-        <div class="card-body no-padding">    
-       <table class="table datatable table-striped table-hover ">
-         <thead>
-           <tr>
-             <th>Factor</th>
-             <th>Measure</th>
-             <th>Outcome</th>
-             <th>Score</th>
-             <th>Weighting</th>
-             <th>Rating</th>
-          
-           </tr>
-         </thead>
-         <tbody>
-         <!-- jinja2 Technique -->
-         {% if d %}  
-         {% for i in d %}
-           <tr>
-             <td>{{i.factors}}</td>
-             <td>{{i.measure}}</td>
-             <td>{{i.outcomes}}</td>
-             <td>{{i.scores}}</td>
-             <td>{{i.weighting}}</td>
-             <td>{{i.rating}}</td>
-           </tr>
-         {% endfor %}
-         {% endif %}
-         </tbody>
-       </table>
-     </div>
+      <div class="row">
+          <div class="col-lg-9">
+          <div class="card col-lg-12">
+            <div class="card-body no-padding">    
+          <table class="table datatable table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Measure</th>
+                <th>Outcome</th>
+                <th>Score</th>
+                <th>Weighting</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+            <!-- jinja2 Technique -->
+            {% if d %}  
+            {% for i in d %}
+              <tr>
+                <td>{{i.factors}}</td>
+                <td>{{i.measure}}</td>
+                <td>{{i.outcomes}}</td>
+                <td>{{i.scores}}</td>
+                <td>{{i.weighting}}</td>
+                <td>{{i.rating}}</td>
+              </tr>
+            {% endfor %}
+            {% endif %}
+            </tbody>
+          </table>
+          </div>
     </div>
 
-     
-     
-         <h1 class="text-center header_label"> Summary</h1>    
-         <div class="card col-lg-16">
-          <div class="card-body no-padding">      
-            <table class="table table-hover ">
-           <thead>
-             <tr>
-               <th>Stand Alone Credit Score</th>
-               <th>Overall Credit Score</th>
-               <th>Probability of Default</th>
-               <th>Credit Rating</th>
-            
-            
-             </tr>
-           </thead>
-           <tbody>
-           <!-- jinja2 Technique -->
-           {% if d1 %}  
-           {% for i in d1 %}
-             <tr>
-               <td>{{i.stand_alone_credit_score}}</td>
-               <td>{{i.overall_credit_score}}</td>
-               <td>{{i.probability_of_default}}</td>
-               <td>{{i.credit_rating}}</td>
-           
-             </tr>
-           {% endfor %}
-           {% endif %}
-           </tbody>
-         </table>
-        </div>
-      </div>
-     
-    
-           {% if d2 %}  
-           {% for i in d2 %}
-             <a href="{% url 'data_pdf' i.Entity_Name %} " class = 'btn btn-info' style="height:40px;width:160px;" text-align="center" > Download PDF </a>
-           {% endfor %}
-           {% endif %}
+    <h1 class="text-center header_label"> Summary</h1>    
+    <div class="card col-lg-12">
+     <div class="card-body no-padding">      
+       <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th>Stand Alone Credit Score</th>
+          <th>Overall Credit Score</th>
+          <th>Probability of Default</th>
+          <th>Credit Rating</th>
+       
+       
+        </tr>
+      </thead>
+      <tbody>
+      <!-- jinja2 Technique -->
+      {% if d1 %}  
+      {% for i in d1 %}
+        <tr>
+          <td>{{i.stand_alone_credit_score}}</td>
+          <td>{{i.overall_credit_score}}</td>
+          <td>{{i.probability_of_default}}</td>
+          <td>{{i.credit_rating}}</td>
       
-      
+        </tr>
+      {% endfor %}
+      {% endif %}
+      </tbody>
+    </table>
+   </div>
+ </div>
 
-     
-     
-      
-      
+
+      {% if d2 %}  
+      {% for i in d2 %}
+        <a href="{% url 'data_pdf' i.Entity_Name %} " class = 'btn btn-info' style="height:40px;width:160px;" text-align="center" > Download PDF </a>
+      {% endfor %}
+      {% endif %}
+ 
+  </div>
+
+
+
+  <div class="col-lg-3">
+    <div class="card col-lg-12" style="margin-left: 10px">
+        <div class="card-body no-padding">
+            <div class="rating-table-wrapper no-header no-footer">
+                <div class="rating-table-container">
+                    <div class="rating-table-top">
+                        <!-- Optional top content -->
+                    </div>
+                    <table class="rating-table-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>Min &gt;=</th>
+                                <th>Max &lt;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tAAA">
+                                <td>pAAA</td>
+                                <td>0.000%</td>
+                                <td>0.956%</td>
+                            </tr>
+                            <tr class="tAAplus">
+                                <td>pAA+</td>
+                                <td>0.96%</td>
+                                <td>1.383%</td>
+                            </tr>
+                            <tr class="tAA">
+                                <td>pAA</td>
+                                <td>1.38%</td>
+                                <td>1.810%</td>
+                            </tr>
+                            <tr class="tAAminus">
+                                <td>pAA-</td>
+                                <td>1.81%</td>
+                                <td>2.237%</td>
+                            </tr>
+                            <tr class="tAplus">
+                                <td>pA+</td>
+                                <td>2.24%</td>
+                                <td>2.920%</td>
+                            </tr>
+                            <tr class="tA">
+                                <td>pA</td>
+                                <td>2.92%</td>
+                                <td>3.603%</td>
+                            </tr>
+                            <tr class="tAminus">
+                                <td>pA-</td>
+                                <td>3.60%</td>
+                                <td>4.285%</td>
+                            </tr>
+                            <tr class="tBBBplus">
+                                <td>pBBB+</td>
+                                <td>4.29%</td>
+                                <td>5.333%</td>
+                            </tr>
+                            <tr class="tBBB">
+                                <td>pBBB</td>
+                                <td>5.33%</td>
+                                <td>6.380%</td>
+                            </tr>
+                            <tr class="tBBBminus">
+                                <td>pBBB-</td>
+                                <td>6.38%</td>
+                                <td>7.427%</td>
+                            </tr>
+                            <tr class="tBBplus">
+                                <td>pBB+</td>
+                                <td>7.43%</td>
+                                <td>8.834%</td>
+                            </tr>
+                            <tr class="tBB">
+                                <td>pBB</td>
+                                <td>8.83%</td>
+                                <td>10.241%</td>
+                            </tr>
+                            <tr class="tBBminus">
+                                <td>tBB-</td>
+                                <td>10.24%</td>
+                                <td>11.648%</td>
+                            </tr>
+                            <tr class="tBplus">
+                                <td>pB+</td>
+                                <td>11.65%</td>
+                                <td>13.331%</td>
+                            </tr>
+                            <tr class="tB">
+                                <td>pB</td>
+                                <td>13.33%</td>
+                                <td>15.013%</td>
+                            </tr>
+                            <tr class="tBminus">
+                                <td>pB-</td>
+                                <td>15.01%</td>
+                                <td>16.696%</td>
+                            </tr>
+                            <tr class="tCCCplus">
+                                <td>pCCC+</td>
+                                <td>16.70%</td>
+                                <td>20.215%</td>
+                            </tr>
+                            <tr class="tCCC">
+                                <td>pCCC</td>
+                                <td>20.22%</td>
+                                <td>23.734%</td>
+                            </tr>
+                            <tr class="tCCCminus">
+                                <td>tCCC-</td>
+                                <td>23.73%</td>
+                                <td>27.253%</td>
+                            </tr>
+                            <tr class="tCCplus">
+                                <td>pCC+</td>
+                                <td>27.25%</td>
+                                {% comment %} <td>30.773%</td> {% endcomment %}
+                            </tr>
+                            {% comment %} <tr class="tCC">
+                                <td>tCC</td>
+                                <td>30.78%</td>
+                                <td>34.293%</td>
+                            </tr>
+                            <tr class="tCplus">
+                                <td>tC+</td>
+                                <td>34.30%</td>
+                                <td>37.812%</td>
+                            </tr>
+                            <tr class="tC">
+                                <td>tC</td>
+                                <td>37.82%</td>
+                                <td>41.331%</td>
+                            </tr> {% endcomment %}
+                        </tbody>
+                    </table>
+                    <div class="rating-table-bottom">
+                        <!-- Optional bottom content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     </section>
   </main>
 
 
+  <div class="modal fade" id="verticalycentered" tabindex="-1">
+    <div class="modal-dialog help-modal modal-dialog-centered">
+      <div class="modal-content help-conten">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 14px; font-weight: bold">Information Dictionary</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body pagetitle" style="text-align: justify;">
+          
+          
+          <p style="font-size: 14px; color: #012970; font-weight:500">
+              Choose Table to View Below 
+          </p>
+
+          <ul>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#variable_scoring_modal">Variable Scoring</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#weighting_modal">Weighting</a></li>
+            <li><a href="#">Library</a></li>
+            </ul>
+      
+          <form method="POST" action="">
+            {% csrf_token %}
+      
+            <div class="modal-button-container ">
+              <button type="button" class="btn-outline-dark btn btn-sm" data-bs-dismiss="modal"
+                      style="width:100px; border-radius: 15px; margin: 5px">Close</button>
+             
+          </div>
+        </form>
+      </div>
+     
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="weighting_modal" tabindex="-1">
+    <div class="modal-dialog help-modal modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 14px; font-weight: bold">Weighting Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body pagetitle" style="text-align: justify;">
+          
+          
+     
+          <div class="card col-lg-16">
+            <div class="card-body no-padding">
+               
+  
+                <table>{{ variable_weighting_df_html|safe }}</table>
+            </div>
+        </div>
+
+          <form method="POST" action="">
+            {% csrf_token %}
+      
+            <div class="modal-button-container ">
+              <button type="button" class="btn-outline-dark btn btn-sm" data-bs-dismiss="modal"
+                      style="width:100px; border-radius: 15px; margin: 5px">Close</button>
+             
+          </div>
+        </form>
+      </div>
+     
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="variable_scoring_modal" tabindex="-1" 
+   aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl" style="width:100vw !important">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 14px; font-weight: bold">Variable Scoring Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body pagetitle" style="text-align: justify;">
+          
+          
+     
+          <div class="card col-lg-16">
+            <div class="card-body no-padding">
+               
+  
+                <table>{{ variable_scoring_df_html|safe }}</table>
+            </div>
+        </div>
+
+          <form method="POST" action="">
+            {% csrf_token %}
+      
+            <div class="modal-button-container ">
+              <button type="button" class="btn-outline-dark btn btn-sm" data-bs-dismiss="modal"
+                      style="width:100px; border-radius: 15px; margin: 5px">Close</button>
+             
+          </div>
+        </form>
+      </div>
+     
+      </div>
+    </div>
+  </div>
 
 
 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const table = document.querySelector('.rating-table-table');
+      const headers = table.querySelectorAll('th');
+      let currentSort = {
+          column: null,
+          order: 'asc'
+      };
+  
+      headers.forEach(header => {
+          header.addEventListener('click', () => {
+              const column = header.getAttribute('data-sort');
+              const order = currentSort.column === column && currentSort.order === 'asc' ? 'desc' : 'asc';
+              currentSort = { column, order };
+              sortTable(table, column, order);
+          });
+      });
+  
+      function sortTable(table, column, order) {
+          const tbody = table.querySelector('tbody');
+          const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+          rows.sort((a, b) => {
+              const aText = a.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+              const bText = b.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+              if (column === 'rating') {
+                  return order === 'asc' ? aText.localeCompare(bText) : bText.localeCompare(aText);
+              } else {
+                  const aValue = parseFloat(aText);
+                  const bValue = parseFloat(bText);
+                  return order === 'asc' ? aValue - bValue : bValue - aValue;
+              }
+          });
+  
+          rows.forEach(row => tbody.appendChild(row));
+      }
+  
+      function getColumnIndex(column) {
+          switch (column) {
+              case 'rating': return 1;
+              case 'min': return 2;
+              case 'max': return 3;
+          }
+      }
+  });
+  
+    </script>
   {% endblock %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const table = document.querySelector('.rating-table-table');
+      const headers = table.querySelectorAll('th');
+      let currentSort = {
+          column: null,
+          order: 'asc'
+      };
+  
+      headers.forEach(header => {
+          header.addEventListener('click', () => {
+              const column = header.getAttribute('data-sort');
+              const order = currentSort.column === column && currentSort.order === 'asc' ? 'desc' : 'asc';
+              currentSort = { column, order };
+              sortTable(table, column, order);
+          });
+      });
+  
+      function sortTable(table, column, order) {
+          const tbody = table.querySelector('tbody');
+          const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+          rows.sort((a, b) => {
+              const aText = a.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+              const bText = b.querySelector(`td:nth-child(${getColumnIndex(column)})`).textContent;
+              if (column === 'rating') {
+                  return order === 'asc' ? aText.localeCompare(bText) : bText.localeCompare(aText);
+              } else {
+                  const aValue = parseFloat(aText);
+                  const bValue = parseFloat(bText);
+                  return order === 'asc' ? aValue - bValue : bValue - aValue;
+              }
+          });
+  
+          rows.forEach(row => tbody.appendChild(row));
+      }
+  
+      function getColumnIndex(column) {
+          switch (column) {
+              case 'rating': return 1;
+              case 'min': return 2;
+              case 'max': return 3;
+          }
+      }
+  });
+  
+    </script>

@@ -3,6 +3,7 @@ import http
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from .sql_uploads import *
 from .forms import *
 from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,7 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 import re
+from typing import Optional
 # Create your views here.
 
 def dashboard(request):
@@ -30,27 +32,52 @@ def datatable(request):
 
 def data_input_analysis(request):
     if request.method == "POST":
-        form = GradeForm(request.POST, request.FILES)
+        form = InputForm(request.POST, request.FILES)
         if form.is_valid():
             # Process the uploaded file
             excel_file = form.cleaned_data["excel_file"]
             # render a table at output, this needs to be an html
-            df_html = excel_upload_view(excel_file)
+            processed_table = "loan_database"
+            df_html = excel_upload_view(excel_file, processed_table)
             # Handle the file processing logic (e.g., using pandas to read the data and populate the Classes table)
             # Your code here
             return render(
                 request,
                 "data_input_analysis.html",
-                {"df_html": df_html, "form": form,
-                    "tbl": "LoanDatabase"},
+                {"df_html": df_html, 
+                "form": form,
+                "loan_database": "loan_database"},
             )
     else:
-        form = GradeForm()
+        form = InputForm()
       
     return render(request, "data_input_analysis.html", {"form": form})
 
+def data_input_portfolio(request):
+    if request.method == "POST":
+        form = InputForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Process the uploaded file
+            excel_file = form.cleaned_data["excel_file"]
+            # render a table at output, this needs to be an html
+            processed_table = "loan_portfolio"
+            df_html = excel_upload_view(excel_file, processed_table)
+            # Handle the file processing logic (e.g., using pandas to read the data and populate the Classes table)
+            # Your code here
+            return render(
+                request,
+                "input_loan_portfolio.html",
+                {"df_html": df_html, 
+                "form": form,
+                "input_loan_portfolio": "input_loan_portfolio"},
+            )
+    else:
+        form = InputForm()
+      
+    return render(request, "input_loan_portfolio.html", {"form": form})
 
-def excel_upload_view(instance):
+
+def excel_upload_view(instance, processed_table):
     """
     Custom function to read the uploaded excel file in memory to view as html
 
@@ -63,12 +90,13 @@ def excel_upload_view(instance):
     # Read the Excel file from the BytesIO object into a DataFrame
     df = pd.read_excel(file_stream, engine="openpyxl")
     
-    # Make first row the header
-    df.columns = df.iloc[0]
-    df = df[1:]
+    if processed_table == "loan_database":
+        # Make first row the header
+        df.columns = df.iloc[0]
+        df = df[1:]
 
-    # Reindex the DataFrame
-    df = df.reset_index(drop=True)
+        # Reindex the DataFrame
+        df = df.reset_index(drop=True)
     # Reorder the columns with "#" as the first column
  
     # Convert DataFrame to HTML
@@ -99,7 +127,10 @@ def excel_upload_view(instance):
 
     
     
-def submit_upload(request, tbl):
+def submit_upload(request, 
+                  loan_database:Optional[str]=None,
+                  loan_portfolio:Optional[str]=None
+                  ):
     if request.method == "POST":
         df_html = request.POST.get("df_html")
         if not df_html:
@@ -111,69 +142,35 @@ def submit_upload(request, tbl):
         except Exception as e:
             messages.error(request, f"Error parsing data: {str(e)}")
             return redirect('your_form_url')  # Adjust URL as necessary
-       
-        processed_entries = write_df_to_sqlite(request, df, tbl)
         
+        #check which table is being processed by checking if not none 
+        if loan_database is not None:
+            processed_table = loan_database
+        elif loan_portfolio is not None:
+            processed_table = loan_portfolio
+            
+        processed_entries = write_df_to_sqlite(request, 
+                                               df,
+                                               processed_table                                               
+                                               )
+                                               
         messages.success(request, f"Processed {processed_entries} entries successfully.")
         return redirect("view_loans")
     else:
         # Return form page if not POST request
         return render(request, "data_input.html")
         
+
+def write_df_to_sqlite(request, df, processed_table):
+        #breakpoint()
+    #breakpoint()
+    if processed_table == "loan_database":
+        processed_entries = loan_database_input(request, df)
         
-def write_df_to_sqlite(request, df, tbl):
+    elif processed_table == "input_loan_portfolio":
+        processed_entries = loan_portfolio_input(request, df)
 
-        processed_entries = 0
-        for _, row in df.iterrows():
-            try:
-                LoanDatabase.objects.update_or_create(
-                    loan_no=int(row['Loan No.']),
-                    defaults={
-                        'entity': row['Entity'],
-                        'registration_number': row['Registration Number'],
-                        'entity_no': int(row['Entity No.']),
-                        'ownership': row['Ownership'],
-                        'entity_sector': row['Entity Sector'],
-                        'location': row['Location'],
-                        'province': row['Province'],
-                        'transaction_no': row['Transaction No.'],
-                        'loan_code': row['Loan Code'],
-                        'transaction_type': row['Transaction Type'],
-                        'loan_amount': float(row['Loan Amount']),
-                        'deployment_date': pd.to_datetime(row['Deployment Date'], errors='coerce'),
-                        'expected_settlement_date': pd.to_datetime(row['Expected Settlement Date'], errors='coerce'),
-                        'actual_settlement_date': pd.to_datetime(row['Actual Settlement Date'], errors='coerce'),
-                        'settlement_amount': float(row['Settlement Amount']),
-                        'admin_structuring_fee': float(row['Admin & Structuring Fee']),
-                        'monthly_interest_charged': float(row['Monthly Interest Charged']),
-                        'default_interest': float(row['Default Interest']),
-                        'pd': float(row['PD']) if pd.notna(row['PD']) else 0,
-                        'credit_rating': row['Credit Rating'],
-                        'rating_code': int(row['Rating Code']),
-                        'model_pricing': float(row['Model Pricing']),
-                        'risk_band': row['Risk Band'],
-                        'cession_of_debtors': row['Cession of Debtors'],
-                        'personal_continuing_cover_surety': row['Personal Continuing Cover Surety'],
-                        'cession_of_bank_accounts': row['Cession of Bank Accounts'],
-                        'g_pay': row['G-PAY'],
-                        'cession_of_payment': row['Cession of Payment'],
-                        'cession_of_contracts': row['Cession of Contracts'],
-                        'cession_of_shares': row['Cession of Shares'],
-                        'value_of_ceded_collateral': float(row['Value of Ceded Collateral']),
-                        'offtaker_name': row['Offtaker Name'],
-                        'offtaker_type': row['Offtaker Type'],
-                        'offtaker_sector': row['Offtaker Sector'],
-                        'jobs_created': int(row['Jobs Created']),
-                        'jobs_saved': int(row['Jobs Saved']),
-                        'average_salary_per_job': float(row['Average Salary Per Job'])
-                    }
-                )
-                processed_entries += 1
-            except Exception as e:
-                messages.error(request, f"Error processing row {row['Loan No.']}: {str(e)}")
-                continue  # You might want to handle this differently
-
-        return processed_entries
+    return processed_entries
 
 
 def view_loans(request):
@@ -186,6 +183,17 @@ def view_loans(request):
     loans_df_html = loans_df.to_html(classes="table datatable table-hover", index=False, border=False)
 
     return render(request, 'view_loans.html', {'loans_df_html': loans_df_html})
+
+def view_portfolio(request):
+    portfolio = LoanPortfolio.objects.all()
+    portfolio_df = pd.DataFrame(list(portfolio.values()))
+    
+    #convert to html and remove id column
+    if 'id' in portfolio_df.columns:
+        portfolio_df = portfolio_df.drop(columns=['id'])
+    portfolio_df_html = portfolio_df.to_html(classes="table datatable table-hover", index=False, border=False)
+
+    return render(request, 'view_portfolio.html', {'portfolio_df_html': portfolio_df_html})
 
 
 def delete_loans(request):
@@ -221,7 +229,8 @@ def analysis_table(request):
     if 'id' in df.columns:
         df = df.drop(columns=['id'])
         
-   
+    #clean: replace NaN with 0
+    df = df.fillna(0)
     df.columns = [f"{month.strftime('%b-%Y')}" for month in df.columns]
 
     df_html = df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
@@ -232,13 +241,42 @@ def analysis_table(request):
     request.session['analysis_table'] = df_json
     
     return render(request, 'analysis_table.html', {'df_analysis_html': df_html})
+
+
+def portfolio_table(request):
     
+    portfolio_df = pd.DataFrame(list(LoanPortfolio.objects.all().values()))
+    
+    if portfolio_df.empty:
+        messages.error(request, "Table is empty. Please upload Loans Portfolio to generate table.")
+        df_html = portfolio_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+        
+        return render(request, 'view_portfolio.html', {'df_portfolio_html': df_html})
+    
+    # df = analysis_process(portfolio_df)
+    # #convert to html and remove id column
+    # if 'id' in df.columns:
+    #     df = df.drop(columns=['id'])
+        
+    # #clean: replace NaN with 0
+    # df = df.fillna(0)
+    # df.columns = [f"{month.strftime('%b-%Y')}" for month in df.columns]
+
+    #df_html = portfolio_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    portfolios = LoanPortfolio.objects.all().order_by('date')
+    #return render(request, 'loan_portfolio_list.html', {'portfolios': portfolios})
+   
+    return render(request, 'view_portfolio.html', {'portfolios': portfolios})
 
 def analysis_process(df):
     # Convert 'deployment_date' to datetime
     df['deployment_date'] = pd.to_datetime(df['deployment_date'])
     df['month_year'] = df['deployment_date'].dt.to_period('M')
     
+     # Convert 'deployment_date' to datetime
+    df['actual_settlement_date'] = pd.to_datetime(df['actual_settlement_date'])
+    df['month_year_matured'] = df['actual_settlement_date'].dt.to_period('M')
+    #breakpoint()
     # Initialize the DataFrame for summarization
     summary_df = pd.DataFrame(index=pd.period_range(df['deployment_date'].min(), df['deployment_date'].max(), freq='M'))
     
@@ -249,10 +287,9 @@ def analysis_process(df):
     summary_df['Invoice Discounting'] = df[df['transaction_type'] == 'Invoice Discounting'].groupby('month_year')['loan_amount'].sum()
     summary_df['Contract Financing'] = df[df['transaction_type'] == 'Contract Financing'].groupby('month_year')['loan_amount'].sum()
     summary_df['Average Interest Charge'] = df.groupby('month_year')['monthly_interest_charged'].mean().fillna(0)
-    summary_df['Number of Maturities'] = df.groupby('month_year')['settlement_amount'].count()
-    summary_df['Value of Maturities'] = df.groupby('month_year')['settlement_amount'].sum()
+    summary_df['Number of Maturities'] = df.groupby('month_year_matured')['actual_settlement_date'].count()
+    summary_df['Value of Maturities'] = df.groupby('month_year_matured')['settlement_amount'].sum()
     summary_df['Average PD'] = df.groupby('month_year')['pd'].mean().fillna(0)
-    
     summary_df['Mpumalanga'] = df[df['province'] == 'Mpumalanga'].groupby('month_year')['loan_amount'].sum()
     summary_df['Limpopo'] = df[df['province'] == 'Limpopo'].groupby('month_year')['loan_amount'].sum()
     summary_df['KwaZulu-Natal'] = df[df['province'] == 'KwaZulu-Natal'].groupby('month_year')['loan_amount'].sum()
@@ -512,14 +549,32 @@ def plot_total_demographic_split(df):
         hole=0.35  # Optional: create a donut-like pie chart
     )])
 
+    # fig.update_layout(
+    #      legend=dict(
+    #         orientation="h",
+    #         yanchor="top",
+    #         y=1.4,
+    #         xanchor="center",
+    #     ),
+    # )
+    #remove legend 
     fig.update_layout(
-         legend=dict(
-            orientation="h",
-            yanchor="top",
-            y=1.4,
-            xanchor="center",
+        
+        title_font=dict(size=16, color='#012970', family='Arial, sans-serif'),
+        showlegend=False,
+      
+        plot_bgcolor="white",
+        font=dict(
+            family="Arial, sans-serif",
+            size=12,
+            color="black"
         ),
-    )
+        hoverlabel=dict(bgcolor="white", font_size=12,
+                            font_family="Rockwell")
+        )
+
+
+        
 
     return fig
 
@@ -603,7 +658,7 @@ def plot_loan_counts_vs_maturity_counts(df):
         y=loans_count,
         mode='lines+markers',
         name='Loans Advanced',
-        line=dict(color='#2E5266')
+        line=dict(color='#17BEBB')
     ))
 
     # Add trace for Number of Maturities
@@ -612,11 +667,11 @@ def plot_loan_counts_vs_maturity_counts(df):
         y=maturities_count,
         mode='lines+markers',
         name='Maturities',
-        line=dict(color='#FFC914')
+        line=dict(color='#FF6B6B')
     ))
 
     # Update layout
-    fig = layout_function(fig, 'Month', 'Total Amount (R)')
+    fig = layout_function(fig, 'Month', 'Number of Loans')
 
     return fig
 # of Loans Advanced

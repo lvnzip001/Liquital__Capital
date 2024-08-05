@@ -1,0 +1,116 @@
+{% extends "base_client.html" %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Loan Portfolio</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.html">Loan Dashboard</a></li>
+            <li class="breadcrumb-item active">Loan Portfolio</li>
+          </ol>
+        </nav>
+      
+      </div>
+      <!-- End Page Title -->
+      {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="card d-flex justify-content-center py-2"
+        style="background-color: #69bdc394;">
+        <div class="card-body">
+          <center>
+            <h5 class="card-title">
+              Submission Successful
+
+  
+            </h5>
+          </center>
+
+          {{message}}
+        </div>
+      </div>
+      
+    {% endif %}
+    {% endfor %}
+
+      <section class="section dashboard">
+
+        
+       
+        <div class="row">
+          <div class="col-lg-12">
+            <button class="btn btn-danger btn-sm" type="button"
+            onclick="#" style="margin:10px 0px 10px 0px">Delete Portfolio</button>
+            {% comment %} onclick="location.href='{% url 'delete_portfolio' %}'" style="margin:10px 0px 10px 0px">Delete Loan</button> {% endcomment %}
+            <button class="btn btn-primary btn-sm" type="button"
+            onclick="location.href='{% url 'analysis_table' %}'" style="margin:10px 0px 10px 0px">Analysis Table</button>
+          </div>
+        </div>
+          
+
+        <div class="card col-lg-16">
+          <div class="card-body no-padding">
+             
+
+              <table class= "table table-striped portfolio-table">
+              
+                  <thead>
+                    <tr>
+                      <th >Date</th>
+                      <th>Portfolio PD</th>
+                      <th>Rating</th>
+                      <th>Return on Loan Book</th>
+                      <th>Return on Cash</th>
+                      <th style="background-color: rgb(140, 201, 187);"># Loans Advanced</th>
+                      <th style="background-color: rgb(201, 140, 140);"># Loans Outstanding</th>
+                      <th>Loan Balance</th>
+                      <th>Accrued Interest</th>
+                      <th>Capital Balance</th>
+                      <th>Cash Balance</th>
+                      <th>Revenue</th>
+                      <th>Outstanding Debt</th>
+                      <th>Provision for Expected Credit Losses</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for portfolio in portfolios %}
+                      <tr>
+                        <td><a href="#">{{ portfolio.date }}</a></td>
+
+                        {% comment %} <td><a href="{% url 'loan_portfolio_detail' portfolio.pk %}">{{ portfolio.date }}</a></td> {% endcomment %}
+                        {% comment %} <td><a href="#">{{ portfolio.date|date:"d-M-Y" }}</a></td> {% endcomment %}
+                        <td>{{ portfolio.portfolio_pd|multiply_by_100|floatformat:2 }}%</td>
+                        <td>{{ portfolio.rating }}</td>
+                        <td>{{ portfolio.return_on_loan_book|floatformat:2 }}%</td>
+                        <td>{{ portfolio.return_on_cash|floatformat:2 }}%</td>
+                        <td style="background-color: rgb(140, 201, 187);">{{ portfolio.number_of_loans_advanced }}</td>
+                        <td style="background-color: rgb(201, 140, 140);">{{ portfolio.number_of_loans_outstanding  }}</td>
+                        <td>R{{ portfolio.loan_balance|intcomma }}</td>
+                        <td>R{{ portfolio.accrued_interest|intcomma }}</td>
+                        <td>R{{ portfolio.capital_balance|intcomma }}</td>
+                        <td>R{{ portfolio.cash_balance|intcomma }}</td>
+                        <td>R{{ portfolio.revenue|intcomma }}</td>
+                        <td>R{{ portfolio.outstanding_debt|intcomma }}</td>
+                        <td>R{{ portfolio.provision_for_expected_credit_losses|intcomma }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+              
+
+
+
+
+
+              </table>
+          </div>
+      </div>
+        
+
+
+      </section>
+    </main>
+
+{% endblock content %}

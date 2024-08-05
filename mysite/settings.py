@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'dashboard',
     "crispy_forms",
     "crispy_bootstrap4",
+    'django.contrib.humanize',
+    'dashboard.templatetags.custom_filters',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
