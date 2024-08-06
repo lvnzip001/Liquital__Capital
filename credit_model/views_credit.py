@@ -113,10 +113,15 @@ def registered_data_input(request, company=None):
     
     #Get required table data
     variable_weighting_df = pd.DataFrame(list(VariableWeighting.objects.all().values()))
-    variable_weighting_df_html = variable_weighting_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    # to_html and dont show index 
+    variable_weighting_df = variable_weighting_df.drop(variable_weighting_df.columns[0], axis=1)
+    variable_weighting_df_html = variable_weighting_df.to_html(classes="table datatable table-hover table-striped", index=False, border=False)
     
     variable_scoring_df = pd.DataFrame(list(VariableScoring.objects.all().values()))
-    variable_scoring_df_html = variable_scoring_df.to_html(classes="table datatable table-hover table-striped", index=True, border=False)
+    # remove first column 
+   
+    variable_scoring_df = variable_scoring_df.drop(variable_scoring_df.columns[0], axis=1)
+    variable_scoring_df_html = variable_scoring_df.to_html(classes="table datatable table-hover table-striped", index=False, border=False)
     
     
     context = {"d": data[:-2], 
@@ -147,8 +152,10 @@ def data_input(request):
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
             add_to_csv_file(filename=company_data, excel_input_file=last_object_location)
             
+            #! I suspect that the company_name should be getting the file path not company_data 
+          
             company_name = getCompanyData(company_data)[0]["Entity Name"]
-            companies = [getcompanybyname(company_name)]
+            companies = [getcompanybyname(company_name,company_data)]
 
             company_info = dict(list(companies[0].items())[:3])
             for k in company_info.keys():
@@ -157,11 +164,20 @@ def data_input(request):
                 company_info[k_new] = company_info.pop(k)
 
             company_info = convert_to_df(company_info)
-            credit_rating_tbl = run_all_credit_func(companies[0])
+            credit_rating_tbl = run_all_credit_func(companies[0], 
+                                                    ratings_data,
+                                                    weightings_data, 
+                                                    score_data)
             credit_score_summary = convert_to_df(
-                overallCreditScore(company_name, companies[0])
+                overallCreditScore(company_name, 
+                                   companies[0],
+                                   company_data, 
+                                   weightings_data,
+                                   score_data,
+                                   ratings_data,
+                                   pd_rating_tbl)
             )
-
+   
             # credit_rating_tbl = df.to_html()
             #
             # parsing the DataFrame in json format.

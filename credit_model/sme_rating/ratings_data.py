@@ -95,13 +95,13 @@ def getFactors(filename):
     return rating
 
 
-def getRatingsByDefaultProbability(demo_filename):
+def getRatingsByDefaultProbability(pd_rating_tbl):
     """ function that calcualtes the PD Implied Credit Rating Score within the CreditRating sheet.
         Returns the table in dictionary form
         
         """
-
-    filename= demo_filename
+    #! Need to improve this function and that should be easy enough , Pd table should be stored at a dataframe
+    filename= pd_rating_tbl
     sheet_name='CreditRating'
     xl_file = pd.ExcelFile(filename)
     sheet_data = pd.read_excel(xl_file, sheet_name)

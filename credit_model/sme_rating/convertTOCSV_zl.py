@@ -99,14 +99,15 @@ def extract_from_excel_file(excel_input_file):
             quality_security_list.append(date_metric.iloc[i,1])
 
     #Invoices, we dont need them anymore
-    #breakpoint()
+    #! We remove the Loan Amount for now
     for i in range(15):
         company_data.pop(f'Invoice {i+1}')
-    #company_data.pop('Loan Amount')
+    company_data.pop('Loan Amount')
 
     company_data['Timing of liquid assets repayment'] = sum(asset_repayment_list)/loan_metric[1]
 
     company_data['Quality of Security'] = sum(quality_security_list)/ sum(date_metric.iloc[:,1])
+    #breakpoint()
 
     
     
@@ -208,7 +209,8 @@ def add_to_csv_file(filename, company_name=None, excel_input_file=None, update='
             else:
                 return("Okay No Update")
         else:
-            update_or_add_data(company_data, 'add')
+          
+            update_or_add_data(company_data,filename, 'add')
 
     else:
         # update_company_data = input(

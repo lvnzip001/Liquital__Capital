@@ -60,6 +60,7 @@ def extractData(filename):
             
             company
             count += 1
+            
             company[headings[i]] = data[i]
            
        
@@ -199,9 +200,10 @@ def updateData(companies):
 
 def getCompanyData(filename):
 
-    """Function that returns the inoput data of the files"""
+    """Function that returns the input data of the files"""
     # step ONE: extract data and store it in a dictionary (map)
     # TODO change this back to companies
+
     companies = extractData(filename)
     companies_1 = extractData(filename)
 
@@ -212,6 +214,8 @@ def getCompanyData(filename):
 
     company = []
     company.append(companies[-1])
+
+
     return company
 
 
